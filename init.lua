@@ -1,0 +1,6 @@
+require("vim-options")
+require("plugin-manager")
+require("plugin-setup")
+require("theme")
+require("lsp")
+require("keymappings")
