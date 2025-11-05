@@ -1,6 +1,12 @@
-require("vim-options")
-require("plugin-manager")
-require("plugin-setup")
-require("theme")
-require("lsp")
-require("keymappings")
+if vim.g.vscode then
+  require("cursor")
+else
+  require("base.vim-options")
+  require("base.plugin-manager")
+  require("base.plugin-setup")
+  require("base.theme")
+  require("base.lsp")
+  require("base.keymappings")
+  -- require("base.mcphub")
+  -- require("base.avante")
+end
