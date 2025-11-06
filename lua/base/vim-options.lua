@@ -13,12 +13,18 @@ vim.opt.foldlevel = 20            -- Prevent auto-folding upon manual folding ("
 
 vim.g.mapleader = " "             -- Changes vim starting shortcut key
 
+-- Vim Network Read Write File Explorer
 vim.g.loaded_netrw = 1            -- Disables Vim File Explorer
 vim.g.loaded_netrwPlugin = 1      -- Disables Vim File Explorer Plugin
+
+-- Designates where to install vim.pack plugins
+vim.opt.packpath:prepend(vim.fn.expand("$XDG_DATA_HOME/nvim/site/pack"))
 
 -- Diagnostics
 vim.diagnostic.enable = true      -- Enable diagnostic text
 vim.opt.updatetime = 250          -- Millisecond wait of no activity before write swap to disk
+
+-- -- Show code definition/issues on hover
 -- vim.cmd([[
 --   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
 -- ]])
@@ -70,7 +76,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	end
 })
 
--- Convert url characters into original characters
+-- Convert URL characters into original characters
 -- Ex: %20 -> [Space]
 local DecodeUrl = function()
 	vim.cmd([[:%s/%\(\x\x\)/\=iconv(nr2char('0x' .. submatch(1)), 'utf-8', 'latin1')/ge]])

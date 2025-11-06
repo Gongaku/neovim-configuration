@@ -6,11 +6,14 @@ local lsp_list = {
   "tinymist"   -- Typst
 }
 
-local fd_os_release = assert(io.open("/etc/os-release"), "r")
-local s_os_release = fd_os_release:read("*a")
-fd_os_release:close()
-s_os_release = s_os_release:lower()
-local is_nixos = s_os_release:match("nixos")
+local fd_os_release = io.open("etc/os-release", "r")
+local is_nixos = nil
+if fd_os_release then
+  local s_os_release = fd_os_release:read("*a")
+  fd_os_release:close()
+  s_os_release = s_os_release:lower()
+  is_nixos = s_os_release:match("nixos")
+end
 
 if is_nixos == nil then
 	require('mason').setup()
