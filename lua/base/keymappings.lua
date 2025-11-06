@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+
 -- Key Mappings
 map({'n', 'v'}, '<leader>r', ':update<CR> :source<CR> :echo "Reloaded Neovim"<CR>')
 map('n', '<leader>w', ':write<CR>')
@@ -32,8 +33,6 @@ map('n', '<leader>gr', vim.lsp.buf.references)
 map('i', '<C-e>', vim.lsp.completion.get)
 map('n', '<leader>d', vim.diagnostic.setqflist)
 
--- Neovim Tree Plugin Keymap
--- `../plugin/nvim-tree.lua`
 -- Toggle File Explorer
 if package.loaded['oil'] then
   -- If oil is loaded
