@@ -25,8 +25,14 @@ require("oil-git").setup({
   }
 })
 
--- Misc setup
+-- Automatically resize Neovim windows
+-- using the golden ratio
+require("focus").setup()
+
+-- Shell linter
 require("shellcheck-nvim").setup()
+
+-- Markdown rendering from the terminal
 require("render-markdown").setup({
 	checkbox = {
 		enabled = true,
@@ -61,7 +67,11 @@ require("render-markdown").setup({
   latex = { enabled = false },
 	render_modes = true
 })
+
+-- Show indents
 require("ibl").setup()
+
+-- Syntax highlighting based on languages
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "c", "lua", "vim", "vimdoc", "elixir", "javascript",
