@@ -4,6 +4,7 @@ local map = vim.keymap.set
 map({'n', 'v'}, '<leader>r', ':update<CR> :source<CR> :echo "Reloaded Neovim"<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':quit<CR>')
+map('n', '<leader>s', ':saveas ')
 
 -- Terminal Mappings
 map({ 't' }, '<leader>q', '<C-\\><C-n>')
@@ -13,6 +14,10 @@ map({ 'n', 'v', 'o' }, '<leader>bn', ':bnext<CR>')
 map({ 'n', 'v', 'o' }, '<leader>bp', ':bprevious<CR>')
 map({ 'n', 'v', 'o' }, '<leader>bd', ':bdelete<CR>')
 map({ 'n', 'v', 'o' }, '<leader>ls', ':buffers<CR>')
+map('n', '<C-W>%', ':vsplit<CR>')
+map('n', '<C-W>"', ':split<CR>')
+map('n', '<leader>tn', ':tabnew<CR>')
+map('n', '<leader>fn', ':enew<CR>')
 
 -- Clipboard Keymap
 map({ 'n', 'v' }, 'y', '"+y') -- Send yank to system clipboard register

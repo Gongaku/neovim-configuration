@@ -37,7 +37,10 @@ if vim.version().minor >= 12 then
     { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 
     -- Typst preview and compilation
-    { src = "https://github.com/chomosuke/typst-preview.nvim" }
+    { src = "https://github.com/chomosuke/typst-preview.nvim" },
+
+    -- Neovim focus
+    { src = "https://github.com/nvim-focus/focus.nvim" },
   })
 else
   require("base.lazy")
