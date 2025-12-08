@@ -10,7 +10,7 @@ local language_servers = {
   "bashls",    -- Bash LS
   "ruff",      -- Python LS
   "pyright",   -- Python Linter
-  "harper_ls", -- Linter & multi-language
+  "harper_ls", -- Multi-language Linter
 }
 
 if not sys_check.is_work then
