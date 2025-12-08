@@ -1,5 +1,5 @@
 if vim.version().minor >= 12 then
-  vim.pack.add({
+  local plugins = {
     -- File Explorer
     { src = "https://github.com/stevearc/oil.nvim" },
     { src = "https://github.com/benomahony/oil-git.nvim" },
@@ -36,12 +36,27 @@ if vim.version().minor >= 12 then
     -- Show indentation lines
     { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 
-    -- Typst preview and compilation
-    { src = "https://github.com/chomosuke/typst-preview.nvim" },
-
     -- Neovim focus
     { src = "https://github.com/nvim-focus/focus.nvim" },
-  })
+  }
+
+  local is_work = require("helpers.sys-check").is_work
+
+  if not is_work then
+    local additional_plugins = {
+      -- Typst preview and compilation
+      { src = "https://github.com/chomosuke/typst-preview.nvim" }
+    }
+
+    for _, plugin in pairs(additional_plugins) do
+      table.insert(plugins, plugin)
+    end
+  end
+
+  vim.pack.add(plugins)
 else
-  require("base.lazy")
+  print()
+  print("Please update to a newer version of neovim!!!")
+  print("Everything not on v0.12 is not supported with this config")
+  -- require("base.lazy")
 end
