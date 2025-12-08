@@ -1,0 +1,24 @@
+-- return {
+--   cmd = { 'nil' },
+--   filetypes = { 'nix' },
+--   root_markers = { 'flake.nix', '.git' },
+--   single_file_support = true,
+--   settings = {
+--     ['nil'] = {
+--       formatting = {
+--         -- command = { "nixfmt", "|", "deadnix", "%", "-eq" },
+--         command = { "nixfmt" },
+--       },
+--       -- diagnostics = {
+--       --   ignored = { "omitted", "expected a derivation" },
+--       -- },
+--       nix = {
+--         flake = {
+--           maxMemoryMB = 8000,
+--           autoArchive = true,
+--           -- autoEvalInputs = true
+--         },
+--       },
+--     },
+--   },
+-- }
