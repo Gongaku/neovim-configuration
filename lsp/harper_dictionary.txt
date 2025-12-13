@@ -26,9 +26,11 @@ d4
 d6
 d8
 kensei
+Kensei's
 ki
 metamagic
 nvim
+neovim
 proficiencies
 sorcerous
 spellcasting
