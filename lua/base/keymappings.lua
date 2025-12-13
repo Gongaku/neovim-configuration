@@ -2,7 +2,7 @@ local map = vim.keymap.set -- Key Mappings
 
 map({ 'n', 'v' }, '<leader>r', ':update<CR> :source<CR> :echo "Reloaded Neovim"<CR>')
 map('n', '<leader>w', ':write<CR>')
-map('n', '<leader>q', ':quit<CR>')
+map('n', '<leader>q', ':quitall!<CR>')
 map('n', '<leader>s', ':saveas ')
 
 -- Terminal Mappings

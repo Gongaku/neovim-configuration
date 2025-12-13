@@ -65,7 +65,33 @@ MiniStarter.setup({
 ---------------------
 -- File Explorer
 ---------------------
-require("oil").setup({ view_options = { show_hidden = true, } })
+oil = require("oil")
+
+local is_detail_visible = false
+
+oil.setup({
+  view_options = { show_hidden = true, },
+  keymaps = {
+    ["gd"] = {
+      desc = "Toggle file detail view",
+      callback = function()
+        is_detail_visible = not is_detail_visible
+        if is_detail_visible then
+          oil.set_columns({ "permissions", "size", "mtime" })
+        else
+          oil.set_columns({})
+        end
+      end
+    },
+    ["<leader>:"] = {
+      "actions.open_cmdline",
+      opts = {
+        shorten_path = true,
+        modify = ":h",
+      },
+    },
+  }
+})
 require("oil-git").setup({ highlights = { OilGitUntracked = { fg = "#ea0001" } } })
 
 ---------------------
