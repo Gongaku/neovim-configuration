@@ -8,8 +8,10 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'Cmdline
   pattern = "*",
   group = augroup,
   callback = function()
-    if vim.opt.number
-        and vim.api.nvim_get_mode().mode ~= 'i' then
+    if vim.bo.filetype == "ministarter" then
+      vim.opt.number = false
+      vim.opt.relativenumber = false
+    elseif vim.opt.number and vim.api.nvim_get_mode().mode ~= 'i' then
       vim.opt.relativenumber = true
     end
   end
@@ -20,7 +22,10 @@ vim.api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEn
   pattern = "*",
   group = augroup,
   callback = function()
-    if vim.opt.number then
+    if vim.bo.filetype == "ministarter" then
+      vim.opt.number = false
+      vim.opt.relativenumber = false
+    elseif vim.opt.number then
       vim.opt.relativenumber = false
       if not vim.tbl_contains({ '@', '-' }, vim.v.event.cmdtype) then
         vim.cmd('redraw')
