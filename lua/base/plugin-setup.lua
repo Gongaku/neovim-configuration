@@ -1,37 +1,45 @@
 ---------------------
 -- Mini Suite setup
 ---------------------
+-- Picks files and help
 require("mini.pick").setup({
   mappings = { choose_marked = "<C-G>" },
   window = {
-    config =
-        function()
-          local height = math.floor(0.85 * vim.o.lines)
-          local width = math.floor(0.85 * vim.o.columns)
-          return {
-            anchor = 'NW',
-            height = height,
-            width = width,
-            row = math.floor(0.5 * (vim.o.lines - height)),
-            col = math.floor(0.5 * (vim.o.columns - width)),
-          }
-        end
+    config = function()
+      local height = math.floor(0.85 * vim.o.lines)
+      local width = math.floor(0.85 * vim.o.columns)
+      return {
+        anchor = 'NW',
+        height = height,
+        width = width,
+        row = math.floor(0.5 * (vim.o.lines - height)),
+        col = math.floor(0.5 * (vim.o.columns - width)),
+      }
+    end
   }
 })
+-- Adds additional features to all mini plugins
 require("mini.extra").setup()
+-- Enables IDE autocompletions
 require("mini.completion").setup()
 
 -- Snippet collection
 local MiniSnippets = require("mini.snippets")
-MiniSnippets.setup({ snippets = { require("mini.snippets").gen_loader.from_lang(), }, })
+MiniSnippets.setup({
+  snippets = {
+    require("mini.snippets").gen_loader.from_lang(),
+  },
+})
 MiniSnippets.start_lsp_server()
 
 -- Neovim start up page
 local MiniStarter = require("mini.starter")
 local version_build = "NVIM " .. vim.split(vim.fn.execute('version'), '\n')[2]:sub(6)
+
 local new_section = function(name, action, section)
   return { name = name, action = action, section = section }
 end
+
 MiniStarter.setup({
   autoopen = true,
   evaluate_single = true,
@@ -40,7 +48,7 @@ MiniStarter.setup({
     new_section("Open recent file", "lua require('mini.extra').pickers.oldfiles()", "Actions"),
     new_section("File Explorer", "lua require('oil')['open']()", "Actions"),
     new_section("Search text", ":Pick grep ", "Actions"),
-    new_section("Quit Neovim", ":quitall!", "Actions"),
+    new_section("Quit Neovim", ":quitall", "Actions"),
     MiniStarter.sections.recent_files(5, false),
   },
   header = table.concat({
@@ -65,8 +73,7 @@ MiniStarter.setup({
 ---------------------
 -- File Explorer
 ---------------------
-oil = require("oil")
-
+local oil = require("oil")
 local is_detail_visible = false
 
 oil.setup({
@@ -95,11 +102,8 @@ oil.setup({
 require("oil-git").setup({ highlights = { OilGitUntracked = { fg = "#ea0001" } } })
 
 ---------------------
--- Misc setup
+-- Markdown
 ---------------------
--- Write better shell scripts
-require("shellcheck-nvim").setup()
-
 -- Render Markdown elements within the terminal
 require("render-markdown").setup({
   checkbox = {
@@ -135,6 +139,12 @@ require("render-markdown").setup({
   latex = { enabled = false },
   render_modes = true
 })
+
+---------------------
+-- Misc setup
+---------------------
+-- Write better shell scripts
+require("shellcheck-nvim").setup()
 
 -- Show tab lines
 require("ibl").setup()

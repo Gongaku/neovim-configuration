@@ -7,7 +7,5 @@ else
   require("base.theme")
   require("base.lsp")
   require("base.keymappings")
-  -- require("base.mcphub")
-  -- require("base.avante")
   require("user_functions")
 end
