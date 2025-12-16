@@ -1,62 +1,35 @@
 if vim.version().minor >= 12 then
-  local plugins = {
-    -- File Explorer
-    { src = "https://github.com/stevearc/oil.nvim" },
-    { src = "https://github.com/benomahony/oil-git.nvim" },
-
-    -- Mini suite
-    -- Includes: Completion, Help Picker, and Snippets
-    { src = "https://github.com/echasnovski/mini.nvim" },
-
-    -- Language parsers
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter", },
-
-    -- Default configs for LSP servers
-    { src = "https://github.com/neovim/nvim-lspconfig" },
-
-    -- LSP servers
-    { src = "https://github.com/mason-org/mason.nvim", },
-    { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-
-    -- Snippets
-    { src = "https://github.com/rafamadriz/friendly-snippets" },
-
-    -- Render Markdown
-    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-
-    -- Bash
-    { src = "https://github.com/pablos123/shellcheck.nvim" },
-
-    -- Color Theme
-    { src = "https://github.com/folke/tokyonight.nvim" },
-
-    -- Status line color theme
-    { src = "https://github.com/nvim-lualine/lualine.nvim" },
-
-    -- Show indentation lines
-    { src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
-
-    -- Neovim focus
-    { src = "https://github.com/nvim-focus/focus.nvim" },
+  local plugins = {}
+  local repositories = {
+    "stevearc/oil.nvim", -- File Explorer
+    "benomahony/oil-git.nvim", -- Git Integration with File Explorer
+    "echasnovski/mini.nvim", -- Mini suite: Includes completion, picker, and snippets
+    "nvim-treesitter/nvim-treesitter", -- Language parser for syntax highlighting
+    "neovim/nvim-lspconfig", -- Default configs for LSP servers
+    "mason-org/mason.nvim", -- LSP repositories
+    "mason-org/mason-lspconfig.nvim", -- Integration between mason and LSP config
+    "rafamadriz/friendly-snippets", -- Snippet collection for different languages
+    "MeanderingProgrammer/render-markdown.nvim", -- Render Markdown in terminal
+    "folke/tokyonight.nvim", -- Tokyo Night Theme
+    "nvim-lualine/lualine.nvim", -- Status line configuration
+    "lukas-reineke/indent-blankline.nvim", -- Show indentations
+    "nvim-focus/focus.nvim", -- Change focus window size via the golden ratio
+    "pablos123/shellcheck.nvim", -- Write better shell scripts
   }
 
-  local is_work = require("helpers.sys-check").is_work
-
-  if not is_work then
-    local additional_plugins = {
-      -- Typst preview and compilation
-      { src = "https://github.com/chomosuke/typst-preview.nvim" }
+  if not helpers.is_work then
+    repositories = {
+      "chomosuke/typst-preview.nvim", -- Allows for live-preview of Typst files
+      unpack(repositories) -- Unpack other repositories table to combine tables
     }
+  end
 
-    for _, plugin in pairs(additional_plugins) do
-      table.insert(plugins, plugin)
-    end
+  for _, plugin in ipairs(repositories) do
+    table.insert(plugins, { src = "https://github.com/" .. plugin })
   end
 
   vim.pack.add(plugins)
 else
-  print()
-  print("Please update to a newer version of neovim!!!")
-  print("Everything not on v0.12 is not supported with this config")
-  -- require("base.lazy")
+  error([[Please update to a newer version of neovim!!!
+    Everything not on v0.12 is not supported with this config]])
 end

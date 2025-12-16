@@ -17,9 +17,13 @@ vim.g.mapleader = " "         -- Changes vim starting shortcut key
 vim.g.loaded_netrw = 1       -- Disables Vim File Explorer
 vim.g.loaded_netrwPlugin = 1 -- Disables Vim File Explorer Plugin
 
--- Designates where to install vim.pack plugins
+-- Designates where to install nvim plugins
 vim.opt.packpath:prepend(vim.fn.expand("${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack"))
 
 -- Diagnostics
 vim.diagnostic.enable = true -- Enable diagnostic text
 vim.opt.updatetime = 250     -- Millisecond wait of no activity before write swap to disk
+
+-- Set theme
+local theme = helpers.package_installed("tokyonight.nvim") and "tokyonight-night" or "wildcharm"
+vim.cmd.colorscheme(theme)

@@ -13,28 +13,28 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "lualine.nvim": {
-      "rev": "3946f0122255bc377d14a59b27b609fb3ab25768",
+      "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "d7b5feb6e769e995f7fcf44d92f49f811c51d10c",
+      "rev": "3b3571b4dadbcb464804466e9872e7246c316af7",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
-      "rev": "ad7146aa61dcaeb54fa900144d768f040090bff0",
+      "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "9101b9e0af5d4781260c7d8c131c170c71d281f2",
+      "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
-    "nvim-lspconfig": {
-      "rev": "2010fc6ec03e2da552b4886fceb2f7bc0fc2e9c0",
-      "src": "https://github.com/neovim/nvim-lspconfig"
+    "nvim": {
+      "rev": "ce8d176faa4643e026e597ae3c31db59b63cef09",
+      "src": "https://github.com/catppuccin/nvim"
     },
-    "nvim-numbertoggle": {
-      "rev": "923f9709989605fe2bc4b9de8a3625fa808f5cd6",
-      "src": "https://github.com/sitiom/nvim-numbertoggle"
+    "nvim-lspconfig": {
+      "rev": "ad95655ec5d13ff7c728d731eb9fd39f34395a03",
+      "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
       "rev": "42fc28ba918343ebfd5565147a42a26580579482",
@@ -45,11 +45,11 @@
       "src": "https://github.com/benomahony/oil-git.nvim"
     },
     "oil.nvim": {
-      "rev": "7e1cd7703ff2924d7038476dcbc04b950203b902",
+      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "060c911c62f995a9db4467dde6fafd699cf94d55",
+      "rev": "686af1e08c47a72e1f969ba2b40a424446d882cf",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "shellcheck.nvim": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/folke/tokyonight.nvim"
     },
     "typst-preview.nvim": {
-      "rev": "64469f832c4d214683c12e0fceba98055cb1ce3b",
+      "rev": "291972a39db85c5d2e76249748aba4206dfd3bc2",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
     }
   }

@@ -1,7 +1,7 @@
 ---------------------
 -- Mini Suite setup
 ---------------------
--- Picks files and help
+-- Picks anything
 require("mini.pick").setup({
   mappings = { choose_marked = "<C-G>" },
   window = {
@@ -13,15 +13,13 @@ require("mini.pick").setup({
         height = height,
         width = width,
         row = math.floor(0.5 * (vim.o.lines - height)),
-        col = math.floor(0.5 * (vim.o.columns - width)),
+        col = math.floor(0.5 * (vim.o.columns - width))
       }
     end
   }
 })
--- Adds additional features to all mini plugins
-require("mini.extra").setup()
--- Enables IDE autocompletions
-require("mini.completion").setup()
+require("mini.extra").setup()      -- Adds additional features to all mini plugins
+require("mini.completion").setup() -- Enables IDE autocompletions
 
 -- Snippet collection
 local MiniSnippets = require("mini.snippets")
@@ -36,39 +34,42 @@ MiniSnippets.start_lsp_server()
 local MiniStarter = require("mini.starter")
 local version_build = "NVIM " .. vim.split(vim.fn.execute('version'), '\n')[2]:sub(6)
 
-local new_section = function(name, action, section)
-  return { name = name, action = action, section = section }
-end
+if not helpers.is_work then
+  local starter_section = function(name, action, section)
+    return { name = name, action = action, section = section }
+  end
 
-MiniStarter.setup({
-  autoopen = true,
-  evaluate_single = true,
-  items = {
-    new_section("Edit new buffer", ":enew", "Actions"),
-    new_section("Open recent file", "lua require('mini.extra').pickers.oldfiles()", "Actions"),
-    new_section("File Explorer", "lua require('oil')['open']()", "Actions"),
-    new_section("Search text", ":Pick grep ", "Actions"),
-    new_section("Quit Neovim", ":quitall", "Actions"),
-    MiniStarter.sections.recent_files(5, false),
-  },
-  header = table.concat({
-    [[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
-    [[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
-    [[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
-    [[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
-    [[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
-    [[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
-    [[]],
-    string.rep(" ", 22) .. version_build,
-  }, "\n"),
-  footer = "",
-  content_hooks = {
-    MiniStarter.gen_hook.adding_bullet("- "),
-    MiniStarter.gen_hook.aligning("center", "center")
-  },
-  query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-.',
-  silent = false
-})
+  MiniStarter.setup({
+    autoopen = true,
+    evaluate_single = true,
+    items = {
+      starter_section("Edit new buffer", ":enew", "Actions"),
+      starter_section("Open recent file", "lua require('mini.extra').pickers.oldfiles()", "Actions"),
+      starter_section("File Explorer", "lua require('oil')['open']()", "Actions"),
+      starter_section("Search text", ":Pick grep ", "Actions"),
+      starter_section("Quit Neovim", ":quitall", "Actions"),
+      MiniStarter.sections.recent_files(5, false),
+    },
+    header = table.concat({
+      [[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗]],
+      [[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║]],
+      [[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║]],
+      [[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║]],
+      [[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║]],
+      [[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
+      [[]],
+      string.rep(" ", 22) .. version_build,
+    }, "\n"),
+    footer = "",
+    content_hooks = {
+      MiniStarter.gen_hook.adding_bullet("- "),
+      MiniStarter.gen_hook.aligning("center", "center")
+    },
+    query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-.',
+    -- silent = false
+    silent = true
+  })
+end
 
 ---------------------
 -- File Explorer
@@ -83,11 +84,7 @@ oil.setup({
       desc = "Toggle file detail view",
       callback = function()
         is_detail_visible = not is_detail_visible
-        if is_detail_visible then
-          oil.set_columns({ "permissions", "size", "mtime" })
-        else
-          oil.set_columns({})
-        end
+        oil.set_columns(is_detail_visible and { "permissions", "size", "mtime" } or {})
       end
     },
     ["<leader>:"] = {
@@ -138,6 +135,49 @@ require("render-markdown").setup({
   },
   latex = { enabled = false },
   render_modes = true
+})
+
+---------------------
+-- Status Line Theming
+---------------------
+-- Color scheme
+local set_theme = function()
+  if vim.g.colors_name == "tokyonight-night" then
+    local colors = require("tokyonight.colors.night")
+    -- Dynamically set colors of section
+    local section_colors = function(color)
+      return {
+        a = { fg = colors.bg, bg = colors[color], gui = 'bold' },
+        b = { fg = colors[color], bg = colors.bg_highlight },
+        c = { fg = colors[color] }
+      }
+    end
+    return {
+      normal = section_colors("green"),
+      insert = section_colors("blue2"),
+      visual = section_colors("orange"),
+      replace = section_colors("red1"),
+      inactive = section_colors("fg")
+    }
+  else
+    return 'auto'
+  end
+end
+
+require("lualine").setup({
+  options = {
+    icons_enabled = not helpers.is_work,
+    theme = set_theme(),
+    disabled_filetypes = {
+      "checkhealth",
+      "nvim-pack",
+      "ministarter",
+    },
+    -- Change separators into diagonal lines instead of sideways triangles
+    section_separators = { left = '', right = '' },
+    component_separators = { left = '', right = '' },
+  },
+  extensions = { "oil", "mason" },
 })
 
 ---------------------
