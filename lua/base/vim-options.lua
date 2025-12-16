@@ -9,7 +9,7 @@ vim.opt.laststatus = 3        -- Changes when last window will have a status lin
 vim.opt.termguicolors = true  -- 24-bit RGB color in the TUI
 vim.opt.winborder = "rounded" -- Adds border to hover text box
 vim.opt.foldenable = false    -- Disable folding on startup
-vim.opt.foldlevel = 20        -- Prevent auto-folding upon manual folding ("zc", "za", etc.)
+-- vim.opt.foldlevel = 20        -- Prevent auto-folding upon manual folding ("zc", "za", etc.)
 
 vim.g.mapleader = " "         -- Changes vim starting shortcut key
 

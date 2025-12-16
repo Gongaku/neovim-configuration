@@ -1,6 +1,6 @@
 local map = vim.keymap.set -- Key Mappings
 
-map({ 'n', 'v' }, '<leader>r', ':update<CR> :source<CR> :echo "Reloaded Neovim"<CR>')
+map({ 'n', 'v', 'o' }, '<leader>r', ':update<CR> :source $MYVIMRC<CR> :echo "Reloaded Neovim"<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':quitall!<CR>')
 map('n', '<leader>s', ':saveas ')
@@ -16,7 +16,6 @@ map('n', '<leader>fn', ':enew<CR>')
 map('n', '<leader>bn', ':bnext<CR>')
 map('n', '<leader>bp', ':bprevious<CR>')
 map('n', '<leader>bd', ':bdelete<CR>')
--- map('n', '<leader>ls', ':buffers<CR>')
 map('n', '<leader>ls', ':Pick buffers<CR>')
 
 -- Clipboard Keymap
@@ -39,7 +38,6 @@ map('n', '<leader>gd', vim.lsp.buf.definition)
 map('n', '<leader>gi', vim.lsp.buf.implementation)
 map('n', '<leader>gr', vim.lsp.buf.references)
 map('i', '<C-e>', vim.lsp.completion.get)
--- map('n', '<leader>d', vim.diagnostic.setqflist)
 map('n', '<leader>d', ':Pick diagnostic scope="current"<CR>')
 
 -- Toggle File Explorer
