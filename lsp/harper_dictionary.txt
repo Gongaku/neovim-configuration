@@ -7,8 +7,11 @@ DEX
 Draconic
 Druidic
 Dwarvish
+Halfling
 Handaxe
 INT
+Kensei's
+Kobold
 Kyuudo
 Lv
 N/A
@@ -26,11 +29,10 @@ d4
 d6
 d8
 kensei
-Kensei's
 ki
 metamagic
-nvim
 neovim
+nvim
 proficiencies
 sorcerous
 spellcasting
