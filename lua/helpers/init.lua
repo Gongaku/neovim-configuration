@@ -24,6 +24,6 @@ M.package_installed = function(package_name)
 end
 
 M.operating_system = tostring(vim.loop.os_uname().sysname)
-M.is_work = string.find(M.operating_system, "macunix") ~= nil and true or false
+M.is_work = string.find(M.operating_system, "Darwin") ~= nil and true or false
 
 return M
