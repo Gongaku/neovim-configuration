@@ -37,3 +37,11 @@ proficiencies
 sorcerous
 spellcasting
 unexpended
+Niri
+niri
+nixos
+nix
+KiB
+MiB
+GiB
+
