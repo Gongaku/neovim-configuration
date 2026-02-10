@@ -8,6 +8,7 @@ local language_servers = {
   "ruff",      -- Python LS
   "pyright",   -- Python Linter
   "harper_ls", -- Multilanguage Linter
+  "yamlls"     -- YAML Linter
 }
 
 if not helpers.is_work then
@@ -18,9 +19,6 @@ if not helpers.is_work then
   if is_nixos then
     vim.lsp.enable("nixd") -- Nix Language LSP
   end
-else
-  -- table.insert(language_servers, "kube-linter") -- Helm/YAML Linter
-  table.insert(language_servers, "yamlls") -- Helm/YAML Linter
 end
 
 require('mason').setup()
