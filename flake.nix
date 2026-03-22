@@ -9,14 +9,17 @@
   outputs =
     inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ inputs.treefmt-nix.flakeModule ];
+      imports = [
+        inputs.treefmt-nix.flakeModule
+        flake-parts.flakeModules.easyOverlay
+      ];
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "aarch64-darwin"
       ];
       perSystem =
-        { pkgs, system, ... }:
+        { pkgs, system, config, ... }:
         {
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
@@ -24,7 +27,7 @@
               inputs.neovim-nightly-overlay.overlays.default
             ];
           };
-          packages.default = pkgs.neovim;
+          packages.default = inputs.neovim-nightly-overlay.packages.${system}.default;
           treefmt.config = {
             projectRootFile = "flake.nix";
             programs = {
@@ -46,13 +49,30 @@
               prettier.enable = true; # Code Formatter
             };
           };
-        };
-      flake = {
-        programs.neovim = {
-          configure = {
-            customLuaRC = builtins.readFile ./init.lua;
+          overlayAttrs = {
+            inherit (config.packages) neovim;
           };
         };
-      };
+      flake =
+        { pkgs, ... }:
+        let
+          system = pkgs.stdenv.hostPlatform.system;
+        in
+        {
+          programs.neovim = {
+            package = inputs.neovim-nightly-overlay.packages.${system}.default;
+            withPython3 = true;
+            withNodeJs = true;
+            configure = {
+              customLuaRC = builtins.readFile ./init.lua;
+            };
+          };
+          xdg.configFile."pycodestyle".text = ''
+            [pycodestyle]
+            ignore = E226,E302,E401,W503,E501
+          '';
+          home.file.".local/state/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server".source =
+            "${pkgs.lua-language-server}/bin/lua-language-server";
+        };
     };
 }
