@@ -13,3 +13,6 @@ git clone https://github.com/Gongaku:neovim-configuration $XDG_CONFIG_HOME/nvim
 ```
 
 Open Neovim so that `vim.pack` activates and downloads repositories.
+
+## Nix Flake
+The flake does not work, lol.
