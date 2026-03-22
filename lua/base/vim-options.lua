@@ -9,7 +9,7 @@ vim.opt.laststatus = 3 -- Changes when last window will have a status line
 vim.opt.termguicolors = true -- 24-bit RGB color in the TUI
 vim.opt.winborder = "rounded" -- Adds border to hover text box
 vim.opt.foldenable = false -- Disable folding on startup
--- vim.opt.foldlevel = 20        -- Prevent auto-folding upon manual folding ("zc", "za", etc.)
+vim.opt.foldlevel = 20        -- Prevent auto-folding upon manual folding ("zc", "za", etc.)
 
 vim.g.mapleader = " " -- Changes vim starting shortcut key
 
@@ -18,7 +18,13 @@ vim.g.loaded_netrw = 1 -- Disables Vim File Explorer
 vim.g.loaded_netrwPlugin = 1 -- Disables Vim File Explorer Plugin
 
 -- Designates where to install nvim plugins
-vim.opt.packpath:prepend(vim.fn.expand("${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/pack"))
+local data_home = tostring(os.getenv("XDG_DATA_HOME"))
+if data_home == nil then
+  data_home = tostring(os.getenv("HOME")) .. "/.local/share"
+end
+local package_path = vim.fn.expand(data_home .. "/nvim/site/pack")
+vim.notify(package_path)
+vim.opt.packpath:prepend(package_path)
 
 -- Diagnostics
 vim.diagnostic.enable = true -- Enable diagnostic text
