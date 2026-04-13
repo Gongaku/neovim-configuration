@@ -1,7 +1,4 @@
-local ls_file_path = function()
-	return debug.getinfo(1).source:match("@?(.*/)")
-end
-local dictionary_path = ls_file_path() .. "harper_dictionary.txt"
+local dictionary_path = vim.fn.stdpath("config") .. "/lsp/harper_dictionary.txt"
 
 return {
 	cmd = { "harper-ls", "--stdio" },

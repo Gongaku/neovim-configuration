@@ -4,7 +4,7 @@ return {
 	root_markers = { ".git" },
 	settings = {
 		bashIde = {
-			logLevel = "debug",
+			logLevel = "warning",
 			globPattern = "*@(.sh|.inc|.bash|.command)",
 			shfmt = {
 				caseIndent = true,

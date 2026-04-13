@@ -2,8 +2,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -11,68 +15,47 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         inputs.treefmt-nix.flakeModule
-        flake-parts.flakeModules.easyOverlay
       ];
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
         "aarch64-darwin"
       ];
+
       perSystem =
-        { pkgs, system, config, ... }:
+        { pkgs, system, ... }:
         {
           _module.args.pkgs = import inputs.nixpkgs {
             inherit system;
-            overlays = [
-              inputs.neovim-nightly-overlay.overlays.default
-            ];
+            overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
           };
-          packages.default = inputs.neovim-nightly-overlay.packages.${system}.default;
+
+          packages.default = import ./nix/neovim.nix {
+            inherit pkgs;
+            inherit (pkgs) lib;
+          };
+
           treefmt.config = {
             projectRootFile = "flake.nix";
             programs = {
-              # Lua
-              stylua.enable = true;
-              # YAML
+              # keep-sorted start
+              deadnix.enable = true;
+              keep-sorted.enable = true;
+              nixfmt.enable = true;
+              prettier.enable = true;
+              shellcheck.enable = true;
+              statix.enable = true;
+              # stylua.enable = true;
               yamlfmt.enable = true;
               yamllint.enable = true;
-              # Nix
-              deadnix.enable = true; # Check for unused dependencies in nix code
-              nixfmt.enable = true; # Nix Formatting
-              statix.enable = true; # Lints and suggestions for Nix
-
-              # Bash/Shell
-              shellcheck.enable = true;
-
-              # Misc
-              keep-sorted.enable = true; # Language-agnostic formatter that sorts lines between two markers in a large file
-              prettier.enable = true; # Code Formatter
+              # keep-sorted end
             };
           };
-          overlayAttrs = {
-            inherit (config.packages) neovim;
-          };
         };
-      flake =
-        { pkgs, ... }:
-        let
-          system = pkgs.stdenv.hostPlatform.system;
-        in
-        {
-          programs.neovim = {
-            package = inputs.neovim-nightly-overlay.packages.${system}.default;
-            withPython3 = true;
-            withNodeJs = true;
-            configure = {
-              customLuaRC = builtins.readFile ./init.lua;
-            };
-          };
-          xdg.configFile."pycodestyle".text = ''
-            [pycodestyle]
-            ignore = E226,E302,E401,W503,E501
-          '';
-          home.file.".local/state/nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server".source =
-            "${pkgs.lua-language-server}/bin/lua-language-server";
-        };
+
+      flake = {
+        homeManagerModules.default = import ./nix/home-manager.nix inputs;
+      };
     };
 }

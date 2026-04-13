@@ -26,12 +26,5 @@ require("mason-lspconfig").setup({ ensure_installed = language_servers })
 
 vim.lsp.enable(language_servers)
 
--- Enables a Lua language specific setting
--- Sets the workspace to allow for Lua LS support
--- for the Neovim configuration Lua files
-vim.lsp.config("lua_ls", {
-	settings = { Lua = { workspace = { library = vim.api.nvim_get_runtime_file("", true) } } },
-})
-
 -- Sets the autocomplete options to select from when using language servers
 vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert", "popup", "fuzzy" }

@@ -15,4 +15,15 @@ git clone https://github.com/Gongaku:neovim-configuration $XDG_CONFIG_HOME/nvim
 Open Neovim so that `vim.pack` activates and downloads repositories.
 
 ## Nix Flake
-The flake does not work, lol.
+
+The flake exposes two outputs:
+
+- **`packages.default`** — A wrapped `nvim` binary with the config baked in.
+  Run directly with `nix run github:Gongaku/neovim-configuration`.
+- **`homeManagerModules.default`** — A home-manager module that installs
+  neovim-nightly and links this config to `~/.config/nvim/`.
+
+  ```nix
+  # In your home-manager configuration:
+  imports = [ nvim-config.homeManagerModules.default ];
+  ```

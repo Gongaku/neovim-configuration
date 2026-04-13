@@ -1,3 +1,7 @@
+local function is_normal_buffer()
+	return vim.bo.buftype == ""
+end
+
 vim.api.nvim_create_autocmd("InsertEnter", {
 	callback = function()
 		if is_normal_buffer() then
