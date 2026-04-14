@@ -1,6 +1,8 @@
 {
+  description = "Neovim Configuration";
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     flake-parts.url = "github:hercules-ci/flake-parts";
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -46,7 +48,6 @@
               prettier.enable = true;
               shellcheck.enable = true;
               statix.enable = true;
-              # stylua.enable = true;
               yamlfmt.enable = true;
               yamllint.enable = true;
               # keep-sorted end

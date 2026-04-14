@@ -15,7 +15,7 @@ inputs:
 {
   programs.neovim = {
     enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
     withPython3 = true;
     withNodeJs = true;
     extraPackages = with pkgs; [
@@ -24,8 +24,11 @@ inputs:
       harper
       lua-language-server
       nixd
+      nixfmt
       pyright
       ruff
+      shellcheck
+      shfmt
       tinymist
       tree-sitter
       yaml-language-server
@@ -33,16 +36,23 @@ inputs:
     ];
   };
 
-  xdg.configFile = {
-    "nvim/init.lua".source = ../init.lua;
-    "nvim/lua".source = ../lua;
-    "nvim/after".source = ../after;
-    "nvim/lsp".source = ../lsp;
-    "nvim/nvim-pack-lock.json".source = ../nvim-pack-lock.json;
+  xdg = {
+    # `$XDG_CONFIG_HOME` (`$HOME/.config`)
+    configFile = {
+      "nvim/init.lua".source = ../init.lua;
+      "nvim/lua".source = ../lua;
+      "nvim/after".source = ../after;
+      "nvim/lsp".source = ../lsp;
+      "nvim/nvim-pack-lock.json".source = ../nvim-pack-lock.json;
+      "pycodestyle".text = lib.mkDefault ''
+        [pycodestyle]
+        ignore = E226,E302,E401,W503,E501
+      '';
+    };
+    # `$XDG_STATE_HOME` (`$HOME/.local/state`)
+    stateFile = {
+      "nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server".source =
+        "${pkgs.lua-language-server}/bin/lua-language-server";
+    };
   };
-
-  xdg.configFile."pycodestyle".text = lib.mkDefault ''
-    [pycodestyle]
-    ignore = E226,E302,E401,W503,E501
-  '';
 }
