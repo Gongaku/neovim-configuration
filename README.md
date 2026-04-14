@@ -2,7 +2,7 @@
 
 This repository contains my dotfiles for Neovim. There are probably better configurations, be they more efficient, complex, or better-looking, but this is mine to play with.
 
-This requires a Neovim version of 12+ as this config relies on using the native neovim packer introduced in this version.
+This requires a Neovim version of 12+ as this config relies on using the native Neovim packer introduced in this version.
 
 ## Installation
 
@@ -19,7 +19,12 @@ Open Neovim so that `vim.pack` activates and downloads repositories.
 The flake exposes two outputs:
 
 - **`packages.default`** — A wrapped `nvim` binary with the config baked in.
-  Run directly with `nix run github:Gongaku/neovim-configuration`.
+  Run directly with:
+
+  ```sh
+  nix run github:Gongaku/neovim-configuration`.
+  ```
+
 - **`homeManagerModules.default`** — A home-manager module that installs
   neovim-nightly and links this config to `~/.config/nvim/`.
 

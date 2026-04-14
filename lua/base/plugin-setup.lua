@@ -105,7 +105,7 @@ require("oil-git").setup({ highlights = { OilGitUntracked = { fg = "#ea0001" } }
 require("render-markdown").setup({
   checkbox = {
     enabled = true,
-    render_modes = false,
+    render_modes = true,
     bullet = false,
     right_pad = 1,
     unchecked = {
@@ -129,12 +129,37 @@ require("render-markdown").setup({
   },
   completions = { lsp = { enabled = true } },
   heading = { border = true },
+  html = {
+    enabled = true,
+    comment = {
+      conceal = true,
+      text = nil,
+      highlight = 'RenderMarkdownHtmlComment',
+    },
+  },
   indent = {
     enabled = true,
-    skip_level = 0,
+    per_level = 2,
+    skip_level = 1,
   },
-  latex = { enabled = false },
+  inline_highlight = {
+    enabled = true,
+    highlight = 'RenderMarkdownInlineHighlight',
+  },
+  latex = { enabled = true },
+  link = {
+    enabled = true,
+    footnote = {
+      enabled = true,
+      superscript = true
+    },
+    custom = {
+      dnd = { pattern = "dnd.*.com", icon = '󱅕 ' },
+    },
+  },
   render_modes = true,
+  sign = { enabled = false },
+  yaml = { enabled = true },
 })
 
 ---------------------
@@ -194,21 +219,21 @@ require("ibl").setup()
 require("focus").setup()
 
 -- Syntax highlighting for different files
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "c",
-    "lua",
-    "vim",
-    "vimdoc",
-    "javascript",
-    "markdown",
-    "markdown_inline",
-    "html",
-    "python",
-  },
-  sync_install = false,
-  ignore_install = {},
-  auto_install = true,
-  highlight = { enable = true },
-  indent = { enable = true },
-})
+-- require("nvim-treesitter.configs").setup({
+--   ensure_installed = {
+--     "c",
+--     "lua",
+--     "vim",
+--     "vimdoc",
+--     "javascript",
+--     "markdown",
+--     "markdown_inline",
+--     "html",
+--     "python",
+--   },
+--   sync_install = false,
+--   ignore_install = {},
+--   auto_install = true,
+--   highlight = { enable = true },
+--   indent = { enable = true },
+-- })
