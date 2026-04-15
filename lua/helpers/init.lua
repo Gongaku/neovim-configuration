@@ -9,7 +9,7 @@ M.file_contains = function(filename, string)
 		file_contents = file_contents:lower()
 		contains_string = file_contents:match(string)
 	end
-	return contains_string
+	return contains_string == string
 end
 
 M.package_installed = function(package_name)
