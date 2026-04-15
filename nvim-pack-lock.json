@@ -28,9 +28,17 @@
       "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
+    "nvim": {
+      "rev": "426dbebe06b5c69fd846ceb17b42e12f890aedf1",
+      "src": "https://github.com/catppuccin/nvim"
+    },
     "nvim-lspconfig": {
       "rev": "ad95655ec5d13ff7c728d731eb9fd39f34395a03",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-treesitter": {
+      "rev": "4916d6592ede8c07973490d9322f187e07dfefac",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "oil-git.nvim": {
       "rev": "d1f27a5982df35b70fb842aa6bbfac10735c7265",

@@ -4,7 +4,7 @@ if vim.version().minor >= 12 then
     "stevearc/oil.nvim",                         -- File Explorer
     "benomahony/oil-git.nvim",                   -- Git Integration with File Explorer
     "echasnovski/mini.nvim",                     -- Mini suite: Includes completion, picker, and snippets
-    -- "nvim-treesitter/nvim-treesitter", -- Language parser for syntax highlighting
+    "nvim-treesitter/nvim-treesitter", -- Language parser for syntax highlighting
     "neovim/nvim-lspconfig",                     -- Default configs for LSP servers
     "mason-org/mason.nvim",                      -- LSP repositories
     "mason-org/mason-lspconfig.nvim",            -- Integration between mason and LSP config
