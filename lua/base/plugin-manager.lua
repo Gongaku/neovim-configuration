@@ -14,8 +14,6 @@ if vim.version().minor >= 12 then
     "lukas-reineke/indent-blankline.nvim",       -- Show indentations
     -- LSP
     "neovim/nvim-lspconfig",                     -- Default configs for LSP servers
-    "mason-org/mason.nvim",                      -- LSP repositories
-    "mason-org/mason-lspconfig.nvim",            -- Integration between mason and LSP config
     "rafamadriz/friendly-snippets",              -- Snippet collection for different languages
     "pablos123/shellcheck.nvim",                 -- Write better shell scripts
     -- Markdown
@@ -27,6 +25,15 @@ if vim.version().minor >= 12 then
     repositories = {
       "chomosuke/typst-preview.nvim", -- Allows for live-preview of Typst files
       unpack(repositories),           -- Unpack other repositories table to combine tables
+    }
+  end
+
+  local is_nixos = helpers.file_contains("/etc/os-release", "nixos")
+  if not is_nixos then
+    repositories = {
+      "mason-org/mason.nvim",           -- LSP repositories
+      "mason-org/mason-lspconfig.nvim", -- Integration between mason and LSP config
+      unpack(repositories)
     }
   end
 

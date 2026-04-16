@@ -29,7 +29,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1",
+      "rev": "29447d7b0e1fc9bc9d0384953e63be3fae816736",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-lspconfig": {
-      "rev": "ad95655ec5d13ff7c728d731eb9fd39f34395a03",
+      "rev": "4b7fbaa239c5db6b36f424a4521ca9f1a401be33",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
