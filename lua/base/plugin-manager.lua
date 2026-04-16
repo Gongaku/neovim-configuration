@@ -1,20 +1,26 @@
 if vim.version().minor >= 12 then
   local plugins = {}
   local repositories = {
+    -- Misc
+    "nvim-focus/focus.nvim",                     -- Change focus window size via the golden ratio
+    -- File Explorer
     "stevearc/oil.nvim",                         -- File Explorer
     "benomahony/oil-git.nvim",                   -- Git Integration with File Explorer
     "echasnovski/mini.nvim",                     -- Mini suite: Includes completion, picker, and snippets
-    "nvim-treesitter/nvim-treesitter", -- Language parser for syntax highlighting
+    -- Theming/Highlighting
+    "nvim-treesitter/nvim-treesitter",           -- Language parser for syntax highlighting
+    "folke/tokyonight.nvim",                     -- Tokyo Night Theme
+    "nvim-lualine/lualine.nvim",                 -- Status line configuration
+    "lukas-reineke/indent-blankline.nvim",       -- Show indentations
+    -- LSP
     "neovim/nvim-lspconfig",                     -- Default configs for LSP servers
     "mason-org/mason.nvim",                      -- LSP repositories
     "mason-org/mason-lspconfig.nvim",            -- Integration between mason and LSP config
     "rafamadriz/friendly-snippets",              -- Snippet collection for different languages
-    "MeanderingProgrammer/render-markdown.nvim", -- Render Markdown in terminal
-    "folke/tokyonight.nvim",                     -- Tokyo Night Theme
-    "nvim-lualine/lualine.nvim",                 -- Status line configuration
-    "lukas-reineke/indent-blankline.nvim",       -- Show indentations
-    "nvim-focus/focus.nvim",                     -- Change focus window size via the golden ratio
     "pablos123/shellcheck.nvim",                 -- Write better shell scripts
+    -- Markdown
+    "MeanderingProgrammer/render-markdown.nvim", -- Render Markdown in terminal
+    "YousefHadder/markdown-plus.nvim",           -- Modern Markdown editing
   }
 
   if not helpers.is_work then

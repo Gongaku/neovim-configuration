@@ -162,6 +162,8 @@ require("render-markdown").setup({
   yaml = { enabled = true },
 })
 
+require("markdown-plus").setup()
+
 ---------------------
 -- Status Line Theming
 ---------------------
@@ -218,7 +220,7 @@ require("ibl").setup()
 -- using the golden ratio
 require("focus").setup()
 
--- Syntax highlighting for different files
+-- -- Syntax highlighting for different files
 -- require("nvim-treesitter.configs").setup({
 --   ensure_installed = {
 --     "c",
