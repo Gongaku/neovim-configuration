@@ -20,7 +20,6 @@ else
   require("mason").setup()
   require("mason-lspconfig").setup({ ensure_installed = language_servers })
 end
-
 vim.lsp.enable(language_servers)
 
 -- Sets the autocomplete options to select from when using language servers

@@ -20,18 +20,19 @@ inputs:
     withNodeJs = true;
     extraPackages = with pkgs; [
       # keep-sorted start
-      bash-language-server
-      harper
-      lua-language-server
-      nixd
-      nixfmt
-      pyright
-      ruff
-      shellcheck
-      shfmt
-      tinymist
+      bash-language-server # Bash language with shellcheck & shfmt support
+      harper # Grammer Checker for developers
+      inotify-tools # Simple interface to `inotify` for filesystem events
+      lua-language-server # Lua Language Server
+      nixd # Nix language server with rich diagnostics
+      nixfmt # Nix Formatter
+      pyright # Python language server
+      ruff # Python linter
+      shellcheck # Shell Script linter
+      shfmt # Shell parser and formatter
+      tinymist # LSP server for typst
       tree-sitter
-      yaml-language-server
+      yaml-language-server # YAML LSP
       # keep-sorted end
     ];
   };

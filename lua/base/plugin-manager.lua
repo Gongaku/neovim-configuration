@@ -12,22 +12,21 @@ local repositories = {
   "benomahony/oil-git.nvim",                   -- Git Integration with File Explorer
   "echasnovski/mini.nvim",                     -- Mini suite: Includes completion, picker, and snippets
   -- Theming/Highlighting
-  "nvim-treesitter/nvim-treesitter",           -- Language parser for syntax highlighting
   "folke/tokyonight.nvim",                     -- Tokyo Night Theme
   "nvim-lualine/lualine.nvim",                 -- Status line configuration
   "lukas-reineke/indent-blankline.nvim",       -- Show indentations
   -- LSP
-  "neovim/nvim-lspconfig",                     -- Default configs for LSP servers
   "rafamadriz/friendly-snippets",              -- Snippet collection for different languages
-  "pablos123/shellcheck.nvim",                 -- Write better shell scripts
   -- Markdown
   "MeanderingProgrammer/render-markdown.nvim", -- Render Markdown in terminal
   "YousefHadder/markdown-plus.nvim",           -- Modern Markdown editing
 }
 
+-- For personal use plugins only
+----------------------------------
 if not helpers.is_work then
   repositories = {
-    "chomosuke/typst-preview.nvim", -- Allows for live-preview of Typst files
+    "chomosuke/typst-preview.nvim",
     unpack(repositories),           -- Unpack other repositories table to combine tables
   }
 end
