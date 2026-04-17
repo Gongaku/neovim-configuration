@@ -216,26 +216,5 @@ require("shellcheck-nvim").setup()
 -- Show tab lines
 require("ibl").setup()
 
--- Automatically resize Neovim windows
--- using the golden ratio
+-- Automatically resize Neovim windows using the golden ratio
 require("focus").setup()
-
--- -- Syntax highlighting for different files
--- require("nvim-treesitter.configs").setup({
---   ensure_installed = {
---     "c",
---     "lua",
---     "vim",
---     "vimdoc",
---     "javascript",
---     "markdown",
---     "markdown_inline",
---     "html",
---     "python",
---   },
---   sync_install = false,
---   ignore_install = {},
---   auto_install = true,
---   highlight = { enable = true },
---   indent = { enable = true },
--- })

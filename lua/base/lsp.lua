@@ -3,7 +3,7 @@
 -- while other inserts are either environment specific or are
 -- not valid names for `mason-lspconfig` but are installed via other means
 local language_servers = {
-  "lua_ls",    -- Lua LS
+  "luals",     -- Lua LS
   "bashls",    -- Bash LS
   "ruff",      -- Python LS
   "pyright",   -- Python Linter
@@ -11,15 +11,9 @@ local language_servers = {
   "yamlls",    -- YAML Linter
 }
 
--- If using personal, add Typst LSP
-if not helpers.is_work then
-  table.insert(language_servers, "tinymist") -- Typst LSP
-end
-
 -- For NixOS configurations only
 local is_nixos = helpers.file_contains("/etc/os-release", "nixos")
 if is_nixos then
-  -- vim.lsp.enable("nixd")
   table.insert(language_servers, "nixd") -- Nix Language LSP
 else
   -- Non-NixOS configurations utilize Mason LSP config to install LSPs
