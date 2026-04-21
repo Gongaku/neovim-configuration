@@ -3,7 +3,7 @@
 -- while other inserts are either environment specific or are
 -- not valid names for `mason-lspconfig` but are installed via other means
 local language_servers = {
-  "luals",     -- Lua LS
+  "lua_ls",    -- Lua LS
   "bashls",    -- Bash LS
   "ruff",      -- Python LS
   "pyright",   -- Python Linter

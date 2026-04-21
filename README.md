@@ -10,7 +10,7 @@ Neovim packer introduced in this version.
 
 Clone the repository
 
-```sh
+```bash
 git clone https://github.com/Gongaku:neovim-configuration $XDG_CONFIG_HOME/nvim
 ```
 
@@ -23,7 +23,7 @@ The flake exposes two outputs:
 - **`packages.default`** — A wrapped `nvim` binary with the config baked in.
   Run directly with:
 
-  ```sh
+  ```bash
   nix run github:Gongaku/neovim-configuration`.
   ```
 
