@@ -27,7 +27,7 @@ local repositories = {
 if not helpers.is_work then
   repositories = {
     "chomosuke/typst-preview.nvim",
-    unpack(repositories),           -- Unpack other repositories table to combine tables
+    unpack(repositories), -- Unpack other repositories table to combine tables
   }
 end
 

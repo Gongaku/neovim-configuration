@@ -16,12 +16,13 @@ let
         ../lua
         ../after
         ../lsp
-        ../nvim-pack-lock.json
+        ../nix-nvim-pack-lock.json
+        ../sync-pack-revs.sh
       ];
     };
     installPhase = ''
       mkdir -p $out/nvim
-      cp -r lua after lsp init.lua nvim-pack-lock.json $out/nvim/
+      cp -r lua after lsp init.lua nix-nvim-pack-lock.json $out/nvim/
     '';
   };
 in
