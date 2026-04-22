@@ -17,7 +17,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "markdown-plus.nvim": {
-      "rev": "36ef546e086708eacc09f3badbdee517fc3972f7",
+      "rev": "74d9a854b39dc76d5a29c8954622d16d116fca1e",
       "src": "https://github.com/YousefHadder/markdown-plus.nvim"
     },
     "mason-lspconfig.nvim": {
@@ -25,11 +25,11 @@
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
-      "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800",
+      "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "418ef4930ddabe80f449c6f1323f8b6abb172d1c",
+      "rev": "5849ef04c32a6a8e55957b946c0a275801d87530",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "oil-git.nvim": {
@@ -41,7 +41,7 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "686af1e08c47a72e1f969ba2b40a424446d882cf",
+      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "tokyonight.nvim": {

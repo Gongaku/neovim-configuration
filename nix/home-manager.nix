@@ -46,7 +46,6 @@ inputs:
       "nvim/lua".source = ../lua;
       "nvim/after".source = ../after;
       "nvim/lsp".source = ../lsp;
-      "nvim/nvim-pack-lock.json".source = ../nix-nvim-pack-lock.json;
       "pycodestyle".text = lib.mkDefault ''
         [pycodestyle]
         ignore = E226,E302,E401,W503,E501
