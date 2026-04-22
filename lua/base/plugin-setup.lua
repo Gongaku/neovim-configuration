@@ -5,13 +5,13 @@
 require("mini.pick").setup({
   window = {
     config = function()
-      local height = math.floor(0.85 * vim.o.lines)
-      local width = math.floor(0.85 * vim.o.columns)
+      local height = math.floor(0.9 * vim.o.lines)
+      local width = math.floor(1 * vim.o.columns)
       return {
         anchor = "NW",
         height = height,
         width = width,
-        row = math.floor(0.5 * (vim.o.lines - height)),
+        row = math.floor(0.2 * (vim.o.lines - height)),
         col = math.floor(0.5 * (vim.o.columns - width)),
       }
     end,
@@ -19,6 +19,7 @@ require("mini.pick").setup({
 })
 require("mini.extra").setup()      -- Adds additional features to all mini plugins
 require("mini.completion").setup() -- Enables IDE autocompletions
+require("mini.cmdline").setup() -- Enable Neovim command line autocompletions
 
 if string.find(tostring(os.getenv("TERM")), "kitty")
     or os.getenv("TERM") == "foot" then

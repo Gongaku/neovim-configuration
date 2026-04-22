@@ -16,15 +16,15 @@ map("n", "<leader>fn", ":enew<CR>", { desc = "Open new file" })
 map("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
 map("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
 map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
-map("n", "<leader>ls", ":Pick buffers<CR>", { desc = "Search buffers" })
+map("n", "<leader>ls", MiniPick.builtin.buffers, { desc = "Search buffers" })
 
 -- Mini Pick Plugin Keymap
 -- `./help.lua` and `../plugin/mini.lua`
-map("n", "<leader>f", ":Pick files<CR>", { desc = "Search Files" })
-map("n", "<leader>g", ":Pick grep<CR>", { desc = "Search Grep Pattern" })
-map("n", "<leader>n", ":Pick history<CR>", { desc = "Search History" })
-map("n", "<leader>h", ":Pick help<CR>", { desc = "Search Help files" })
-map("n", "<leader>m", ":Pick keymaps<CR>", { desc = "Search Key Mappings" })
+map("n", "<leader>pf", function() MiniPick.builtin.files({ tool = "fd" }) end, { desc = "Search Files" })
+map("n", "<leader>pg", MiniPick.builtin.grep_live, { desc = "Search Grep Pattern" })
+map("n", "<leader>pn", MiniExtra.pickers.history, { desc = "Search History" })
+map("n", "<leader>ph", MiniPick.builtin.help, { desc = "Search Help files" })
+map("n", "<leader>pm", MiniExtra.pickers.keymaps, { desc = "Search Key Mappings" })
 
 -- LSP Plugin Keymap
 -- `./lsp.lua` and `../plugin/lsp-plugins.lua`
@@ -33,7 +33,7 @@ map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Get definition" })
 map("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Get implementation" })
 map("n", "<leader>gr", vim.lsp.buf.references, { desc = "Get references" })
 map("i", "<C-e>", vim.lsp.completion.get, { desc = "Get completion" })
-map("n", "<leader>d", ':Pick diagnostic scope="current"<CR>', { desc = "Open Diagnostics" })
+map("n", "<leader>pd", MiniExtra.pickers.diagnostic, { desc = "Open Diagnostics" })
 
 -- Toggle File Explorer
 if package.loaded["oil"] then
