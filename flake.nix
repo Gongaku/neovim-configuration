@@ -49,7 +49,6 @@
               shellcheck.enable = true;
               statix.enable = true;
               yamlfmt.enable = true;
-              yamllint.enable = true;
               # keep-sorted end
             };
           };
