@@ -37,9 +37,9 @@ map("n", "<leader>pd", MiniExtra.pickers.diagnostic, { desc = "Open Diagnostics"
 
 -- Toggle File Explorer
 if package.loaded["oil"] then
-  -- If oil is loaded
   map("n", "<leader>e", function()
-    assert(require("oil")[vim.bo.filetype == "oil" and "close" or "open"])()
+    local fn = require("oil")[vim.bo.filetype == "oil" and "close" or "open"]
+    if fn then fn() end
   end, { desc = "Open File Explorer" })
 else
   -- Default to `netrw` (network read write) file explorer if neither are loaded

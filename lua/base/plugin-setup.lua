@@ -2,7 +2,7 @@
 -- Mini Suite setup
 ---------------------
 -- Picks anything
-require("mini.pick").setup({
+require("mini.pick").setup({ -- Enable Pickers
   window = {
     config = function()
       local height = math.floor(0.9 * vim.o.lines)
@@ -17,12 +17,19 @@ require("mini.pick").setup({
     end,
   },
 })
-require("mini.extra").setup()      -- Adds additional features to all mini plugins
-require("mini.completion").setup() -- Enables IDE autocompletions
-require("mini.cmdline").setup() -- Enable Neovim command line autocompletions
+require("mini.extra").setup()       -- Adds additional features to all mini plugins
+require("mini.completion").setup()  -- Enables IDE autocompletions
+require("mini.cmdline").setup()     -- Enable Neovim command line autocompletions
+require("mini.indentscope").setup({ -- Enable highlighting on current indentation
+  draw = {
+    delay = 50,
+    animation = function() return 0 end,
+  },
+  symbol = "▎",
+})
 
 if string.find(tostring(os.getenv("TERM")), "kitty")
-    or os.getenv("TERM") == "foot" then
+    or os.getenv("TERM") == "foot" then -- Check if terminal supports Dev Icons
   require("mini.icons").setup()
 end
 

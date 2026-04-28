@@ -1,27 +1,15 @@
-vim.api.nvim_create_autocmd("FileType", {
+local EXCLUDED = { lua = true }
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   callback = function(args)
+--     vim.b[args.buf].miniindentscope_disable = EXCLUDED[args.match] or false
+--     print(args.match)
+--     print(vim.b[args.buf].miniindentscope_disable)
+--   end,
+-- })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'lua',
   callback = function(args)
-    local ft = args.match
-    local excluded_fts = function()
-      local excluded = {
-        "lua",
-      }
-
-      for _, filetype in pairs(excluded) do
-        if ft == filetype then
-          return true
-        end
-      end
-      return false
-    end
-
-    if not excluded_fts() then
-      require("mini.indentscope").setup({
-        draw = {
-          delay = 50,
-          animation = function() return 0 end,
-        },
-        symbol = "▎",
-      })
-    end
-  end,
+    vim.b[args.buf].miniindentscope_disable = true
+  end
 })

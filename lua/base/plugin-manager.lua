@@ -1,6 +1,5 @@
 if vim.version().minor < 12 then
-  error([[Please update to a newer version of neovim!!!
-    Everything not on v0.12 is not supported with this config]])
+  error("Neovim v0.12+ is required. Please update your Neovim installation.")
 end
 
 local plugins = {}
@@ -31,7 +30,7 @@ if not helpers.is_work then
   }
 end
 
-local is_nixos = helpers.file_contains("/etc/os-release", "nixos")
+local is_nixos = helpers.is_nixos
 if not is_nixos then
   repositories = {
     "mason-org/mason.nvim",           -- LSP repositories

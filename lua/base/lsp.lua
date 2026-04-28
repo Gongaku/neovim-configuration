@@ -12,7 +12,7 @@ local language_servers = {
 }
 
 -- For NixOS configurations only
-local is_nixos = helpers.file_contains("/etc/os-release", "nixos")
+local is_nixos = helpers.is_nixos
 if is_nixos then
   table.insert(language_servers, "nixd") -- Nix Language LSP
 else

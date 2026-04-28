@@ -22,7 +22,8 @@ M.package_installed = function(package_name)
   return is_installed
 end
 
-M.operating_system = tostring(vim.loop.os_uname().sysname)
+M.operating_system = tostring(vim.uv.os_uname().sysname)
 M.is_work = string.find(M.operating_system, "Darwin") ~= nil
+M.is_nixos = M.file_contains("/etc/os-release", "nixos")
 
 return M

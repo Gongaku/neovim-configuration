@@ -5,6 +5,7 @@ vim.opt.signcolumn = "yes"        -- Extra column to left for signs/symbols
 vim.opt.autoindent = true         -- Auto-indentation
 vim.opt.shiftwidth = 2            -- Set number of spaces for auto-indentation
 vim.opt.tabstop = 2               -- Set tab length
+vim.opt.softtabstop = 2           -- Backspace removes up to 2 spaces
 vim.opt.expandtab = true
 vim.opt.laststatus = 3            -- Changes when last window will have a status line
 vim.opt.termguicolors = true      -- 24-bit RGB color in the TUI
