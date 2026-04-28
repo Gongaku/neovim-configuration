@@ -25,9 +25,9 @@ Start Neovim once so `vim.pack` can download plugins. Revisions are recorded in
 
 ### Lock files
 
-| File | Role |
-| --- | --- |
-| `nvim-pack-lock.json` | Canonical plugin revisions from Neovim’s pack resolver. |
+| File                      | Role                                                    |
+| ------------------------- | ------------------------------------------------------- |
+| `nvim-pack-lock.json`     | Canonical plugin revisions from Neovim’s pack resolver. |
 | `nix-nvim-pack-lock.json` | Same plugins pinned for the Nix-wrapped Neovim package. |
 
 `sync-pack-revs.sh` copies revisions from `nvim-pack-lock.json` into
