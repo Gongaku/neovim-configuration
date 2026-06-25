@@ -9,13 +9,13 @@ map("n", "<leader>s", ":saveas ", { desc = "Save file as" })
 map({ "t" }, "<leader>q", "<C-\\><C-n>", { desc = "Quit Terminal" })
 
 -- Buffers Keymap
-map("n", "<C-W>%", ":vsplit<CR>", { desc = "Split Vertically" })
-map("n", '<C-W>"', ":split<CR>", { desc = "Split Horizontally" })
-map("n", "<leader>tn", ":tabnew<CR>", { desc = "Open new tab" })
-map("n", "<leader>fn", ":enew<CR>", { desc = "Open new file" })
-map("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer" })
-map("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer" })
-map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
+map("n", "<C-W>%", ":vsplit<CR>", { desc = "Split Vertically", silent = true })
+map("n", '<C-W>"', ":split<CR>", { desc = "Split Horizontally", silent = true })
+map("n", "<leader>tn", ":tabnew<CR>", { desc = "Open new tab", silent = true })
+map("n", "<leader>fn", ":enew<CR>", { desc = "Open new file", silent = true })
+map("n", "<leader>bn", ":bnext<CR>", { desc = "Next buffer", silent = true })
+map("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous buffer", silent = true })
+map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer", silent = true })
 map("n", "<leader>ls", MiniPick.builtin.buffers, { desc = "Search buffers" })
 
 -- Mini Pick Plugin Keymap

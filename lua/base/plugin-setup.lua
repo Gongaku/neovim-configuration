@@ -231,3 +231,14 @@ require("ibl").setup()
 
 -- Automatically resize Neovim windows using the golden ratio
 require("focus").setup()
+
+-- For personal use plugins only
+----------------------------------
+if not helpers.is_work then
+  require("typst-preview").setup({
+    dependencies_bin = {
+      tinymist = 'tinymist',
+      websocat = 'websocat'
+    },
+  })
+end

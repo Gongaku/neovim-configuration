@@ -33,7 +33,9 @@ inputs:
       shellcheck # Shell Formatter/Validator
       shfmt # Shell Formatter
       tinymist # LSP server for Typst
-      tree-sitter
+      tree-sitter # Syntax highlighting
+      typst # Typst Language
+      websocat # Web Sockets
       yaml-language-server # YAML LSP
       # keep-sorted end
     ];
