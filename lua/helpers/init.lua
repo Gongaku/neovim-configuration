@@ -13,13 +13,14 @@ M.file_contains = function(filename, string)
 end
 
 M.package_installed = function(package_name)
-  local is_installed = false
-  for _, v in pairs(vim.pack.get()) do
+  local ok, packs = pcall(vim.pack.get)
+  if not ok then return false end
+  for _, v in pairs(packs) do
     if v.active and v.spec.name == package_name then
-      is_installed = true
+      return true
     end
   end
-  return is_installed
+  return false
 end
 
 M.operating_system = tostring(vim.uv.os_uname().sysname)
