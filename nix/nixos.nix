@@ -5,7 +5,7 @@
 #   imports = [ nvim-config.nixosModules.default ];
 # ```
 #
-# Installs neovim-nightly system-wide with the config symlinked into
+# Installs neovim-nightly system-wide with plugins and config symlinked into
 # /etc/xdg/nvim, which Neovim picks up via XDG_CONFIG_DIRS.
 inputs:
 {
@@ -13,34 +13,41 @@ inputs:
   lib,
   ...
 }:
+let
+  plugins = import ./plugins.nix { inherit pkgs lib; };
+in
 {
   nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    withPython3 = true;
+    withNodeJs = true;
+    configure.packages.nvim-config.start = plugins;
+  };
+
   environment = {
-    systemPackages =
-      [
-        pkgs.neovim
-      ]
-      ++ (with pkgs; [
-        # keep-sorted start
-        bash-language-server # Bash language with `shellcheck` & `shfmt` support
-        harper # Grammar Checker for developers
-        inotify-tools # Simple interface to `inotify` for filesystem events
-        lua # Lua Language
-        lua-language-server # Lua Language Server
-        nixd # Nix language server with rich diagnostics
-        nixfmt # Nix Formatter
-        pyright # Python language server
-        ruff # Python linter
-        shellcheck # Shell Formatter/Validator
-        shfmt # Shell Formatter
-        tinymist # LSP server for Typst
-        tree-sitter # Syntax highlighting
-        typst # Typst Language
-        websocat # Web Sockets
-        yaml-language-server # YAML LSP
-        # keep-sorted end
-      ]);
+    systemPackages = with pkgs; [
+      # keep-sorted start
+      bash-language-server
+      harper
+      inotify-tools
+      lua
+      lua-language-server
+      nixd
+      nixfmt
+      pyright
+      ruff
+      shellcheck
+      shfmt
+      tinymist
+      tree-sitter
+      typst
+      websocat
+      yaml-language-server
+      # keep-sorted end
+    ];
 
     etc = {
       "xdg/nvim/init.lua".source = ../init.lua;
