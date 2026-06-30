@@ -21,10 +21,14 @@ while IFS= read -r plugin; do
   fi
 
   src=$(jq -r --arg p "$plugin" '.plugins[$p].src' "$NIX_LOCK")
+  if [[ -z "$src" || "$src" == "null" ]]; then
+    echo "Error: .src missing for $plugin in $NIX_LOCK" >&2
+    exit 1
+  fi
   tarball="${src}/archive/${new_rev}.tar.gz"
   echo "Updating $plugin: ${old_rev:0:8} -> ${new_rev:0:8}"
   echo "  Fetching hash from $tarball ..."
-  hash=$(nix store prefetch-file --json --unpack "$tarball" 2>/dev/null | jq -r '.hash')
+  hash=$(nix store prefetch-file --json --unpack "$tarball" | jq -r '.hash')
   result=$(echo "$result" | jq \
     --arg p "$plugin" --arg r "$new_rev" --arg h "$hash" \
     '.plugins[$p].rev = $r | .plugins[$p].hash = $h')
