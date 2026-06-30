@@ -22,6 +22,7 @@ in
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
     withPython3 = true;
     withNodeJs = true;
     configure.packages.nvim-config.start = plugins;
