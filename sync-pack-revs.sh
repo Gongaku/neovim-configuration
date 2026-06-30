@@ -10,30 +10,30 @@ if [[ ! -f "$NIX_LOCK" || ! -f "$PACK_LOCK" ]]; then
 fi
 
 updated=0
+result=$(cat "$NIX_LOCK")
 
-new_json=$(jq --slurpfile pack "$PACK_LOCK" '
-  .plugins |= with_entries(
-    if $pack[0].plugins[.key] then
-      .value.rev = $pack[0].plugins[.key].rev
-    else
-      .
-    end
-  )
-' "$NIX_LOCK")
-
-# Report what changed
 while IFS= read -r plugin; do
   old_rev=$(jq -r --arg p "$plugin" '.plugins[$p].rev' "$NIX_LOCK")
   new_rev=$(jq -r --arg p "$plugin" '.plugins[$p].rev' "$PACK_LOCK")
-  if [[ "$old_rev" != "$new_rev" ]]; then
-    echo "Updated $plugin: ${old_rev:0:8} -> ${new_rev:0:8}"
-    ((updated++))
+
+  if [[ "$old_rev" == "$new_rev" ]]; then
+    continue
   fi
+
+  src=$(jq -r --arg p "$plugin" '.plugins[$p].src' "$NIX_LOCK")
+  tarball="${src}/archive/${new_rev}.tar.gz"
+  echo "Updating $plugin: ${old_rev:0:8} -> ${new_rev:0:8}"
+  echo "  Fetching hash from $tarball ..."
+  hash=$(nix store prefetch-file --json --unpack "$tarball" 2>/dev/null | jq -r '.hash')
+  result=$(echo "$result" | jq \
+    --arg p "$plugin" --arg r "$new_rev" --arg h "$hash" \
+    '.plugins[$p].rev = $r | .plugins[$p].hash = $h')
+  updated=$((updated + 1))
 done < <(jq -r '.plugins | keys[]' "$NIX_LOCK" | while read -r p; do
   jq -e --arg p "$p" '.plugins[$p]' "$PACK_LOCK" > /dev/null 2>&1 && echo "$p"
 done)
 
-echo "$new_json" > "$NIX_LOCK"
+echo "$result" > "$NIX_LOCK"
 
 if [[ $updated -eq 0 ]]; then
   echo "All revs already in sync."

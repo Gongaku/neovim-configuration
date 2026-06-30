@@ -21,14 +21,14 @@
       "hash": "sha256-OpLZH+sL5cj2rcP5/T+jDOnuxd1QWLHCt2RzloffZOA="
     },
     "markdown-plus.nvim": {
-      "rev": "36ef546e086708eacc09f3badbdee517fc3972f7",
+      "rev": "74d9a854b39dc76d5a29c8954622d16d116fca1e",
       "src": "https://github.com/YousefHadder/markdown-plus.nvim",
-      "hash": "sha256-13DCxnQ62opW5A1fFl3CoeS2o4KSeXkCAHW4h+bbYc4="
+      "hash": "sha256-AzlZlcQP85PxA4YLdj6a+B/IGh7u1dWaD4zdCXQs4Yw="
     },
     "mini.nvim": {
-      "rev": "418ef4930ddabe80f449c6f1323f8b6abb172d1c",
+      "rev": "5849ef04c32a6a8e55957b946c0a275801d87530",
       "src": "https://github.com/echasnovski/mini.nvim",
-      "hash": "sha256-bHEFu4XZI9QHP41h11sSNgRG43PDSkdgTyzmJt64gLk="
+      "hash": "sha256-itvNBJwakDOeIUaEZS5qSeI3L//kve3ub7r16EUvgi0="
     },
     "oil-git.nvim": {
       "rev": "d1f27a5982df35b70fb842aa6bbfac10735c7265",
@@ -41,9 +41,9 @@
       "hash": "sha256-JWPQnPzAXqratmV8F44W5EB1ty1/lb8lETawtyXskqE="
     },
     "render-markdown.nvim": {
-      "rev": "686af1e08c47a72e1f969ba2b40a424446d882cf",
+      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-      "hash": "sha256-0SOv/Jec2qb4zOfiuIP5dyXp1bz+N3BlbvG3Iu2fDU8="
+      "hash": "sha256-c+2KzCACUnb/RkkLsI9uxvJNLP0PDgmuPSUlO/XgGBw="
     },
     "tokyonight.nvim": {
       "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
