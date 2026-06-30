@@ -30,17 +30,16 @@ if not helpers.is_work then
   }
 end
 
-local is_nixos = helpers.is_nixos
-if not is_nixos then
+if not helpers.is_nixos then
   repositories = {
     "mason-org/mason.nvim",           -- LSP repositories
     "mason-org/mason-lspconfig.nvim", -- Integration between mason and LSP config
     unpack(repositories)
   }
-end
 
-for _, plugin in pairs(repositories) do
-  table.insert(plugins, { src = "https://github.com/" .. plugin })
-end
+  for _, plugin in pairs(repositories) do
+    table.insert(plugins, { src = "https://github.com/" .. plugin })
+  end
 
-vim.pack.add(plugins)
+  vim.pack.add(plugins)
+end

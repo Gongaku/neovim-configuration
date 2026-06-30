@@ -2,47 +2,58 @@
   "plugins": {
     "focus.nvim": {
       "rev": "26a755c363284547196ceb258a83f92608d7979b",
-      "src": "https://github.com/nvim-focus/focus.nvim"
+      "src": "https://github.com/nvim-focus/focus.nvim",
+      "hash": "sha256-u5/kP3b3txEyyPPu3MTKpINDXhQPuC3/HK2aqste1sw="
     },
     "friendly-snippets": {
       "rev": "572f5660cf05f8cd8834e096d7b4c921ba18e175",
-      "src": "https://github.com/rafamadriz/friendly-snippets"
+      "src": "https://github.com/rafamadriz/friendly-snippets",
+      "hash": "sha256-FzApcTbWfFkBD9WsYMhaCyn6ky8UmpUC2io/co/eByM="
     },
     "indent-blankline.nvim": {
       "rev": "005b56001b2cb30bfa61b7986bc50657816ba4ba",
-      "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+      "src": "https://github.com/lukas-reineke/indent-blankline.nvim",
+      "hash": "sha256-0q/V+b4UrDRnaC/eRWOi9HU9a61vQSAM9/C8ZQyKt+Y="
     },
     "lualine.nvim": {
       "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
-      "src": "https://github.com/nvim-lualine/lualine.nvim"
+      "src": "https://github.com/nvim-lualine/lualine.nvim",
+      "hash": "sha256-OpLZH+sL5cj2rcP5/T+jDOnuxd1QWLHCt2RzloffZOA="
     },
     "markdown-plus.nvim": {
       "rev": "36ef546e086708eacc09f3badbdee517fc3972f7",
-      "src": "https://github.com/YousefHadder/markdown-plus.nvim"
+      "src": "https://github.com/YousefHadder/markdown-plus.nvim",
+      "hash": "sha256-13DCxnQ62opW5A1fFl3CoeS2o4KSeXkCAHW4h+bbYc4="
     },
     "mini.nvim": {
       "rev": "418ef4930ddabe80f449c6f1323f8b6abb172d1c",
-      "src": "https://github.com/echasnovski/mini.nvim"
+      "src": "https://github.com/echasnovski/mini.nvim",
+      "hash": "sha256-bHEFu4XZI9QHP41h11sSNgRG43PDSkdgTyzmJt64gLk="
     },
     "oil-git.nvim": {
       "rev": "d1f27a5982df35b70fb842aa6bbfac10735c7265",
-      "src": "https://github.com/benomahony/oil-git.nvim"
+      "src": "https://github.com/benomahony/oil-git.nvim",
+      "hash": "sha256-QQj3ck+5GpA/htG0tZzniS5bbfRscvcfXjMUjY8F9A4="
     },
     "oil.nvim": {
       "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
-      "src": "https://github.com/stevearc/oil.nvim"
+      "src": "https://github.com/stevearc/oil.nvim",
+      "hash": "sha256-JWPQnPzAXqratmV8F44W5EB1ty1/lb8lETawtyXskqE="
     },
     "render-markdown.nvim": {
       "rev": "686af1e08c47a72e1f969ba2b40a424446d882cf",
-      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim",
+      "hash": "sha256-0SOv/Jec2qb4zOfiuIP5dyXp1bz+N3BlbvG3Iu2fDU8="
     },
     "tokyonight.nvim": {
       "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
-      "src": "https://github.com/folke/tokyonight.nvim"
+      "src": "https://github.com/folke/tokyonight.nvim",
+      "hash": "sha256-4zfkv3egdWJ/GCWUehV0MAIXxsrGT82Wd1Qqj1SCGOk="
     },
     "typst-preview.nvim": {
       "rev": "291972a39db85c5d2e76249748aba4206dfd3bc2",
-      "src": "https://github.com/chomosuke/typst-preview.nvim"
+      "src": "https://github.com/chomosuke/typst-preview.nvim",
+      "hash": "sha256-bf81niQnQTOcSmlIkWN9j+n/1sGvbHgJIiIHRC9fqdQ="
     }
   }
 }

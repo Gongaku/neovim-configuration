@@ -56,6 +56,7 @@
 
       flake = {
         homeManagerModules.default = import ./nix/home-manager.nix inputs;
+        nixosModules.default = import ./nix/nixos.nix inputs;
       };
     };
 }

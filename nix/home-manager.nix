@@ -25,6 +25,7 @@ inputs:
       bash-language-server # Bash language with `shellcheck` & `shfmt` support
       harper # Grammar Checker for developers
       inotify-tools # Simple interface to `inotify` for filesystem events
+      lua # Lua Language
       lua-language-server # Lua Language Server
       nixd # Nix language server with rich diagnostics
       nixfmt # Nix Formatter
