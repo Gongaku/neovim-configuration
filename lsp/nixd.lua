@@ -7,7 +7,9 @@ return {
   settings = {
     nixd = {
       nixpkgs = {
-        expr = "import <nixpkgs> { }",
+        expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations."
+            .. hostname
+            .. ".pkgs",
       },
       formatting = {
         command = { "nixfmt" },
@@ -19,9 +21,9 @@ return {
               .. ".options",
         },
         home_manager = {
-          expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations."
+          expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations."
               .. hostname
-              .. ".options",
+              .. ".options.home-manager.users.type.getSubOptions [ ]",
         },
       },
     },
