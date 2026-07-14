@@ -21,6 +21,7 @@ else
 	-- Non-NixOS configurations utilize Mason LSP config to install LSPs
 	require("mason").setup()
 	require("mason-lspconfig").setup({ ensure_installed = language_servers })
+	require("mason-tool-installer").setup({ ensure_installed = { "stylua" } })
 end
 vim.lsp.enable(language_servers)
 

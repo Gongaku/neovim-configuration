@@ -30,7 +30,9 @@ map("n", "<leader>pm", MiniExtra.pickers.keymaps, { desc = "Search Key Mappings"
 
 -- LSP Plugin Keymap
 -- `./lsp.lua` and `../plugin/lsp-plugins.lua`
-map("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" })
+map("n", "<leader>lf", function()
+	require("conform").format({ lsp_fallback = true })
+end, { desc = "Format file" })
 map("n", "<leader>gd", vim.lsp.buf.definition, { desc = "Get definition" })
 map("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Get implementation" })
 map("n", "<leader>gr", vim.lsp.buf.references, { desc = "Get references" })

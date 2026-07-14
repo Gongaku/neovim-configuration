@@ -32,6 +32,7 @@ inputs:
       ruff # Python linter
       shellcheck # Shell Formatter/Validator
       shfmt # Shell Formatter
+      stylua # Lua Formatter
       tinymist # LSP server for Typst
       tree-sitter # Syntax highlighting
       typst # Typst Language

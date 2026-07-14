@@ -16,6 +16,7 @@ local repositories = {
 	"lukas-reineke/indent-blankline.nvim", -- Show indentations
 	-- LSP
 	"rafamadriz/friendly-snippets", -- Snippet collection for different languages
+	"stevearc/conform.nvim", -- Formatter dispatch (stylua, etc)
 	-- Markdown
 	"MeanderingProgrammer/render-markdown.nvim", -- Render Markdown in terminal
 	"YousefHadder/markdown-plus.nvim", -- Modern Markdown editing
@@ -35,6 +36,7 @@ if not is_nixos then
 	repositories = {
 		"mason-org/mason.nvim", -- LSP repositories
 		"mason-org/mason-lspconfig.nvim", -- Integration between mason and LSP config
+		"WhoIsSethDaniel/mason-tool-installer.nvim", -- Install non-LSP tools (stylua, etc)
 		unpack(repositories),
 	}
 end
