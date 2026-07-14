@@ -46,11 +46,23 @@
               keep-sorted.enable = true;
               nixfmt.enable = true;
               prettier.enable = true;
+              rumdl-format.enable = true;
               shellcheck.enable = true;
+              shfmt.enable = true;
               statix.enable = true;
+              stylua.enable = true;
               yamlfmt.enable = true;
               # keep-sorted end
             };
+            settings.formatter.shfmt.options = pkgs.lib.mkForce [
+              "-i"
+              "2"
+              "-s"
+              "-ci"
+              "-bn"
+              "-sr"
+              "-w"
+            ];
           };
         };
 

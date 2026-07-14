@@ -4,7 +4,7 @@ set -euo pipefail
 NIX_LOCK="nix-nvim-pack-lock.json"
 PACK_LOCK="nvim-pack-lock.json"
 
-if [[ ! -f "$NIX_LOCK" || ! -f "$PACK_LOCK" ]]; then
+if [[ ! -f $NIX_LOCK || ! -f $PACK_LOCK ]]; then
   echo "Error: must be run from the nvim config directory" >&2
   exit 1
 fi
@@ -25,7 +25,7 @@ new_json=$(jq --slurpfile pack "$PACK_LOCK" '
 while IFS= read -r plugin; do
   old_rev=$(jq -r --arg p "$plugin" '.plugins[$p].rev' "$NIX_LOCK")
   new_rev=$(jq -r --arg p "$plugin" '.plugins[$p].rev' "$PACK_LOCK")
-  if [[ "$old_rev" != "$new_rev" ]]; then
+  if [[ $old_rev != "$new_rev" ]]; then
     echo "Updated $plugin: ${old_rev:0:8} -> ${new_rev:0:8}"
     ((updated++))
   fi

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nixos-rebuild build *)",
+      "mcp__plugin_claude-code-home-manager_nixos__nix",
+      "Bash(nix eval *)",
+      "Bash(journalctl *)",
+      "Bash(starship *)",
+      "Bash(nix flake metadata *)",
+      "Bash(nix flake show *)",
+      "Bash(nix flake prefetch *)"
+    ]
+  }
+}

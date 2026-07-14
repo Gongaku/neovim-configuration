@@ -7,9 +7,9 @@ local EXCLUDED = { lua = true }
 --     print(vim.b[args.buf].miniindentscope_disable)
 --   end,
 -- })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'lua',
-  callback = function(args)
-    vim.b[args.buf].miniindentscope_disable = true
-  end
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function(args)
+		vim.b[args.buf].miniindentscope_disable = true
+	end,
 })

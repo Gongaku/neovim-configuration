@@ -20,7 +20,9 @@ map("n", "<leader>ls", MiniPick.builtin.buffers, { desc = "Search buffers" })
 
 -- Mini Pick Plugin Keymap
 -- `./help.lua` and `../plugin/mini.lua`
-map("n", "<leader>pf", function() MiniPick.builtin.files({ tool = "fd" }) end, { desc = "Search Files" })
+map("n", "<leader>pf", function()
+	MiniPick.builtin.files({ tool = "fd" })
+end, { desc = "Search Files" })
 map("n", "<leader>pg", MiniPick.builtin.grep_live, { desc = "Search Grep Pattern" })
 map("n", "<leader>pn", MiniExtra.pickers.history, { desc = "Search History" })
 map("n", "<leader>ph", MiniPick.builtin.help, { desc = "Search Help files" })
@@ -37,13 +39,15 @@ map("n", "<leader>pd", MiniExtra.pickers.diagnostic, { desc = "Open Diagnostics"
 
 -- Toggle File Explorer
 if package.loaded["oil"] then
-  map("n", "<leader>e", function()
-    local fn = require("oil")[vim.bo.filetype == "oil" and "close" or "open"]
-    if fn then fn() end
-  end, { desc = "Open File Explorer" })
+	map("n", "<leader>e", function()
+		local fn = require("oil")[vim.bo.filetype == "oil" and "close" or "open"]
+		if fn then
+			fn()
+		end
+	end, { desc = "Open File Explorer" })
 else
-  -- Default to `netrw` (network read write) file explorer if neither are loaded
-  map("n", "<leader>e", function()
-    vim.cmd(vim.bo.filetype == "netrw" and ":Rex" or ":Ex")
-  end, { desc = "Open File Explorer" })
+	-- Default to `netrw` (network read write) file explorer if neither are loaded
+	map("n", "<leader>e", function()
+		vim.cmd(vim.bo.filetype == "netrw" and ":Rex" or ":Ex")
+	end, { desc = "Open File Explorer" })
 end
