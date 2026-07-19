@@ -27,8 +27,9 @@ while IFS= read -r plugin; do
   new_rev=$(jq -r --arg p "$plugin" '.plugins[$p].rev' "$PACK_LOCK")
   if [[ $old_rev != "$new_rev" ]]; then
     echo "Updated $plugin: ${old_rev:0:8} -> ${new_rev:0:8}"
-    ((updated++))
+    updated=$((updated + 1))
   fi
+  echo "$updated"
 done < <(jq -r '.plugins | keys[]' "$NIX_LOCK" | while read -r p; do
   jq -e --arg p "$p" '.plugins[$p]' "$PACK_LOCK" > /dev/null 2>&1 && echo "$p"
 done)

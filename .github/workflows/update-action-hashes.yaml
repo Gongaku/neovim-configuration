@@ -1,0 +1,144 @@
+# Runs bi-weekly on Monday at 10:00 UTC (even ISO week numbers) and on manual dispatch.
+# For every pinned `uses: owner/repo@<sha> # vX.Y.Z` line across all workflow files,
+# resolves the current commit SHA for that tag via the GitHub API and rewrites the file
+# if the SHA has drifted (e.g. tag was updated or re-signed).
+name: Update Action Hashes
+on:
+  schedule:
+    - cron: "0 10 * * 1"
+  workflow_dispatch:
+jobs:
+  update-hashes:
+    name: Update GitHub Action hashes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # On scheduled runs, only proceed on even ISO week numbers so the job
+      # fires once every two weeks. workflow_dispatch always proceeds.
+      - name: Check bi-weekly gate
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            week=$(date +%V)
+            if [ $(( 10#$week % 2 )) -ne 0 ]; then
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Checkout repository
+        if: steps.gate.outputs.skip != 'true'
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          persist-credentials: true
+      - name: Resolve and update action hashes
+        if: steps.gate.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 << 'PYEOF'
+          import json
+          import os
+          import re
+          import subprocess
+          import sys
+
+          WORKFLOW_DIR = ".github/workflows"
+
+          # Matches lines like:
+          #   uses: owner/repo@<40-hex-sha>  # v1.2.3
+          # Capture groups: (prefix, action, sha, separator, version)
+          USES_RE = re.compile(
+              r"(uses:\s+)([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"
+              r"@([0-9a-f]{40})"
+              r"(\s+#\s*)(v[\w.]+)"
+          )
+
+          def resolve_tag_sha(owner_repo: str, tag: str) -> str | None:
+              """Return the commit SHA that a tag points to, following annotated tags."""
+              owner, repo = owner_repo.split("/", 1)
+              try:
+                  result = subprocess.run(
+                      ["gh", "api", f"/repos/{owner}/{repo}/git/refs/tags/{tag}"],
+                      capture_output=True,
+                      text=True,
+                      check=True,
+                  )
+                  ref = json.loads(result.stdout)
+                  obj = ref["object"]
+                  if obj["type"] == "tag":
+                      # Annotated tag — one more hop to reach the commit
+                      result = subprocess.run(
+                          ["gh", "api", f"/repos/{owner}/{repo}/git/tags/{obj['sha']}"],
+                          capture_output=True,
+                          text=True,
+                          check=True,
+                      )
+                      tag_obj = json.loads(result.stdout)
+                      return tag_obj["object"]["sha"]
+                  return obj["sha"]  # Lightweight tag points directly to commit
+              except (subprocess.CalledProcessError, KeyError, json.JSONDecodeError) as exc:
+                  print(f"  warning: could not resolve {owner_repo}@{tag}: {exc}", file=sys.stderr)
+                  return None
+
+          def get_latest_version(owner_repo: str) -> str | None:
+              """Return the latest release tag name, or None if unavailable."""
+              owner, repo = owner_repo.split("/", 1)
+              try:
+                  result = subprocess.run(
+                      ["gh", "api", f"/repos/{owner}/{repo}/releases/latest"],
+                      capture_output=True,
+                      text=True,
+                      check=True,
+                  )
+                  return json.loads(result.stdout)["tag_name"]
+              except (subprocess.CalledProcessError, KeyError, json.JSONDecodeError):
+                  return None
+
+          any_changed = False
+
+          for filename in sorted(os.listdir(WORKFLOW_DIR)):
+              if not filename.endswith((".yaml", ".yml")):
+                  continue
+              filepath = os.path.join(WORKFLOW_DIR, filename)
+              with open(filepath) as fh:
+                  original = fh.read()
+              updated = original
+
+              for m in USES_RE.finditer(original):
+                  prefix, action, old_sha, sep, version = m.groups()
+                  latest_version = get_latest_version(action) or version
+                  target_version = latest_version if latest_version != version else version
+                  new_sha = resolve_tag_sha(action, target_version)
+                  if new_sha and (new_sha != old_sha or target_version != version):
+                      old_line = f"{prefix}{action}@{old_sha}{sep}{version}"
+                      new_line = f"{prefix}{action}@{new_sha}{sep}{target_version}"
+                      updated = updated.replace(old_line, new_line)
+                      if target_version != version:
+                          print(f"  {action}: {version} -> {target_version} ({new_sha[:8]}...)")
+                      else:
+                          print(f"  {action}@{version}: {old_sha[:8]}... -> {new_sha[:8]}...")
+                      any_changed = True
+
+              if updated != original:
+                  with open(filepath, "w") as fh:
+                      fh.write(updated)
+                  print(f"Updated: {filename}")
+
+          if not any_changed:
+              print("All action hashes are already up to date.")
+          PYEOF
+      - name: Commit updated action hashes
+        if: steps.gate.outputs.skip != 'true'
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
+        with:
+          commit_message: "chore: Update GitHub Action hashes [skip ci]"
+          commit_user_name: Flake Bot Update
+          commit_author: Flake Bot Update <actions@github.com>
+          branch: main
+          skip_dirty_check: false
+          skip_fetch: true

@@ -1,0 +1,62 @@
+# Runs on every push to main and auto-formats code using `nix fmt` (treefmt).
+# If formatting changes any files, the bot commits them back with [skip ci]
+# to prevent triggering another format run.
+name: Format Code
+
+on:
+  push:
+    branches: [main]
+    # Ignore commits already made by this workflow to avoid recursive runs.
+    # [skip ci] in the commit message is the primary guard; this is a fallback.
+  workflow_dispatch:
+
+jobs:
+  format:
+    name: Code Formatting
+    runs-on: ubuntu-latest
+    # Skip bot-generated commits so we don't format the formatter's own output.
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: true
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3 # v31.10.6
+
+      - name: Run formatter
+        id: formatter
+        run: nix fmt | grep -v "evaluation warning" || true
+
+      # Build a human-readable changelog of which files were touched.
+      # `git diff --name-only` is used instead of parsing `git status` text
+      # because it is stable, unambiguous, and handles edge cases correctly.
+      - name: Build commit message
+        id: commit_message
+        run: |
+          changed=$(git diff --name-only)
+          count=$(echo "$changed" | grep -c . || true)
+          changelog="${changed/#/   - }"
+          {
+            echo "commit_message<<EOF"
+            echo "Formatted Code: Updated ${count} files"
+            echo -e "\n[skip ci]\n"
+            echo "Changelog:"
+            echo "$changelog"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Commit formatted files
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
+        with:
+          commit_message: ${{ steps.commit_message.outputs.commit_message }}
+          commit_user_name: Flake Bot Update
+          commit_author: Flake Bot Update <actions@github.com>
+          branch: main
+          skip_dirty_check: false
+          skip_fetch: true
