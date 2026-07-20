@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "conform.nvim": {
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "focus.nvim": {
       "rev": "26a755c363284547196ceb258a83f92608d7979b",
       "src": "https://github.com/nvim-focus/focus.nvim"
@@ -13,23 +17,27 @@
       "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "lualine.nvim": {
-      "rev": "47f91c416daef12db467145e16bed5bbfe00add8",
+      "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "markdown-plus.nvim": {
-      "rev": "74d9a854b39dc76d5a29c8954622d16d116fca1e",
+      "rev": "59075587b4540abd5fac68232c39d5a46db6d44c",
       "src": "https://github.com/YousefHadder/markdown-plus.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "3b3571b4dadbcb464804466e9872e7246c316af7",
+      "rev": "a4068c3ebd4cb335b25239e5ea35c22ee6007962",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
+    "mason-tool-installer.nvim": {
+      "rev": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc",
+      "src": "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim"
+    },
     "mason.nvim": {
-      "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
+      "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "5849ef04c32a6a8e55957b946c0a275801d87530",
+      "rev": "05a80b0340a92136a93ab04346cf97de3f165948",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "oil-git.nvim": {
@@ -37,11 +45,11 @@
       "src": "https://github.com/benomahony/oil-git.nvim"
     },
     "oil.nvim": {
-      "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
+      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
+      "rev": "f422cb5c6855f150e2ddcfaf44e7157b98b34f6a",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "tokyonight.nvim": {
@@ -51,6 +59,10 @@
     "typst-preview.nvim": {
       "rev": "291972a39db85c5d2e76249748aba4206dfd3bc2",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
+    },
+    "vim-yaml-folds": {
+      "rev": "890ccd8e5370808d569e96dbb06cbeca2cf5993a",
+      "src": "https://github.com/pedrohdz/vim-yaml-folds"
     }
   }
 }
