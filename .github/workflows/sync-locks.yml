@@ -18,7 +18,7 @@ jobs:
       - name: Update flake.lock
         run: nix flake update
       - name: Format Nix files
-        run: nix fmt | grep -v "evaluation warning" || true
+        run: nix fmt . | grep -v "evaluation warning" || true
       - name: Sync nix-nvim-pack-lock.json
         run: bash sync-pack-revs.sh
       - name: Commit changes

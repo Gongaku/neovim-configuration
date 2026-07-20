@@ -22,6 +22,12 @@ vim.g.mapleader = " " -- Changes vim starting shortcut key
 vim.g.loaded_netrw = 1 -- Disables Vim File Explorer
 vim.g.loaded_netrwPlugin = 1 -- Disables Vim File Explorer Plugin
 
+-- Disable Providers
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python3_provider = 0
+
 -- Designates where to install nvim plugins
 local data_home = os.getenv("XDG_DATA_HOME") or (os.getenv("HOME") .. "/.local/share")
 local package_path = vim.fn.expand(data_home .. "/nvim/site/pack")
