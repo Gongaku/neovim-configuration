@@ -42,7 +42,7 @@ require("render-markdown").setup({
 		enabled = true,
 		highlight = "RenderMarkdownInlineHighlight",
 	},
-	latex = { enabled = true },
+	latex = { enabled = false },
 	link = {
 		enabled = true,
 		footnote = {
@@ -55,7 +55,7 @@ require("render-markdown").setup({
 	},
 	render_modes = true,
 	sign = { enabled = false },
-	yaml = { enabled = true },
+	yaml = { enabled = false },
 })
 
 require("markdown-plus").setup()

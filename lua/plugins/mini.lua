@@ -16,6 +16,7 @@ require("mini.pick").setup({
 require("mini.extra").setup()
 require("mini.completion").setup()
 require("mini.cmdline").setup()
+require("mini.cursorword").setup()
 require("mini.indentscope").setup({
 	draw = {
 		delay = 50,
