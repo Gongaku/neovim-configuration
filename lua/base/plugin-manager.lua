@@ -10,6 +10,7 @@ local repositories = {
 	"stevearc/oil.nvim", -- File Explorer
 	"benomahony/oil-git.nvim", -- Git Integration with File Explorer
 	"echasnovski/mini.nvim", -- Mini suite: Includes completion, picker, and snippets
+	"nvim-treesitter/nvim-treesitter", -- Manage tree-sitter parsers (inert on NixOS; shipped via home-manager)
 	-- Theming/Highlighting
 	"folke/tokyonight.nvim", -- Tokyo Night Theme
 	"nvim-lualine/lualine.nvim", -- Status line configuration

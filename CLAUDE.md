@@ -43,9 +43,9 @@ These are set once at startup in `lua/helpers/init.lua` and available globally a
 
 Two lock files exist because the config is used in two ways:
 
-| File                      | Used by                                                      |
-| ------------------------- | ------------------------------------------------------------ |
-| `nvim-pack-lock.json`     | Plain Neovim — `vim.pack` reads this to pin plugin revisions |
+| File                      | Used by                                                                                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `nvim-pack-lock.json`     | Plain Neovim — `vim.pack` reads this to pin plugin revisions                                              |
 | `nix-nvim-pack-lock.json` | Flake-built Neovim — `nix/neovim.nix` copies it as `nvim-pack-lock.json` so `vim.pack` uses the same pins |
 
 `sync-pack-revs.sh` copies the `rev` field for each plugin from the first file into the second,

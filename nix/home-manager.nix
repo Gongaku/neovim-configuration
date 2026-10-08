@@ -18,6 +18,16 @@ inputs:
   programs.neovim = {
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    # Tree-sitter parsers aren't bundled with the nightly build; ship them as
+    # Nix-packaged grammars so render-markdown (html) and treesitter folds work.
+    plugins = with pkgs.vimPlugins; [
+      nvim-treesitter-parsers.html
+      nvim-treesitter-parsers.html.associatedQuery
+      nvim-treesitter-parsers.typst
+      nvim-treesitter-parsers.typst.associatedQuery
+      nvim-treesitter-parsers.yaml
+      nvim-treesitter-parsers.yaml.associatedQuery
+    ];
     extraPackages = with pkgs; [
       # keep-sorted start
       bash-language-server # Bash language with `shellcheck` & `shfmt` support
