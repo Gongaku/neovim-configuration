@@ -17,12 +17,14 @@ let
         ../after
         ../lsp
         ../nix-nvim-pack-lock.json
-        ../sync-pack-revs.sh
       ];
     };
     installPhase = ''
       mkdir -p $out/nvim
-      cp -r lua after lsp init.lua nix-nvim-pack-lock.json $out/nvim/
+      cp -r lua after lsp init.lua $out/nvim/
+      # vim.pack only reads a lockfile named `nvim-pack-lock.json`; serve the
+      # synced revs under that name so the flake-built nvim stays pinned.
+      cp nix-nvim-pack-lock.json $out/nvim/nvim-pack-lock.json
     '';
   };
 in

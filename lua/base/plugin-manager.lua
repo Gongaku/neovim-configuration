@@ -35,8 +35,7 @@ local is_nixos = helpers.is_nixos
 if not is_nixos then
 	repositories = {
 		"mason-org/mason.nvim", -- LSP repositories
-		"mason-org/mason-lspconfig.nvim", -- Integration between mason and LSP config
-		"WhoIsSethDaniel/mason-tool-installer.nvim", -- Install non-LSP tools (stylua, etc)
+		"WhoIsSethDaniel/mason-tool-installer.nvim", -- Install LSP and other tools (stylua, etc)
 		unpack(repositories),
 	}
 end

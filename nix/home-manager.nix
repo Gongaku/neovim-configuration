@@ -18,8 +18,6 @@ inputs:
   programs.neovim = {
     enable = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    withPython3 = true;
-    withNodeJs = true;
     extraPackages = with pkgs; [
       # keep-sorted start
       bash-language-server # Bash language with `shellcheck` & `shfmt` support
@@ -53,11 +51,6 @@ inputs:
         [pycodestyle]
         ignore = E226,E302,E401,W503,E501
       '';
-    };
-    # `$XDG_STATE_HOME` (`$HOME/.local/state`)
-    stateFile = {
-      "nvim/mason/packages/lua-language-server/libexec/bin/lua-language-server".source =
-        "${pkgs.lua-language-server}/bin/lua-language-server";
     };
   };
 }

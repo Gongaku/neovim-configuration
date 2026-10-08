@@ -25,7 +25,9 @@
 
 1. Create `lsp/<server_name>.lua` returning a config table (see existing files for examples)
 2. Add the server name string to `language_servers` in `lua/base/lsp.lua`
-3. `vim.lsp.enable()` picks it up automatically; the config file is loaded by Neovim's built-in
+3. On non-NixOS, also add the corresponding **Mason package name** (e.g. `bash-language-server`,
+   `harper-ls`) to `mason_packages` in `lua/base/lsp.lua` so Mason installs the binary
+4. `vim.lsp.enable()` picks it up automatically; the config file is loaded by Neovim's built-in
    LSP resolution from the `lsp/` directory
 
 ## Environment Flags (`helpers`)
@@ -44,7 +46,7 @@ Two lock files exist because the config is used in two ways:
 | File                      | Used by                                                      |
 | ------------------------- | ------------------------------------------------------------ |
 | `nvim-pack-lock.json`     | Plain Neovim — `vim.pack` reads this to pin plugin revisions |
-| `nix-nvim-pack-lock.json` | Nix flake — `nix/neovim.nix` fetches plugins at build time   |
+| `nix-nvim-pack-lock.json` | Flake-built Neovim — `nix/neovim.nix` copies it as `nvim-pack-lock.json` so `vim.pack` uses the same pins |
 
 `sync-pack-revs.sh` copies the `rev` field for each plugin from the first file into the second,
 keeping both in sync. CI runs this automatically after any lock update.

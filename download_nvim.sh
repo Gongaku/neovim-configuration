@@ -39,7 +39,7 @@ if "$IS_DOWNLOAD_REQUIRED"; then
 
 	EXTRACT_COMMANDS=$(
 		cat <<- EXTRACT
-			rm -rf /usr/bin/nvim* /opt/neovim
+			rm -rf /usr/bin/nvim /usr/local/bin/nvim /opt/neovim
 			tar -C /opt -xzf "$TARBALL" \
 				&& mv /opt/${TARBALL%%.*} /opt/neovim \
 				&& chown 0:0 /opt/neovim/bin/nvim
