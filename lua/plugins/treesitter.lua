@@ -3,7 +3,7 @@ if helpers.is_nixos then
 	return
 end
 
-require("nvim-treesitter.configs").setup({
+require("nvim-treesitter.config").setup({
 	ensure_installed = { "html", "yaml", "typst" },
 	sync_install = false,
 	auto_install = false,
