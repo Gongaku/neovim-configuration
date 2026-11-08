@@ -1,21 +1,12 @@
 -- List Loaded Neovim plugins as a string to view in the :message buffer
+-- Scans 'runtimepath' rather than vim.pack.get(), which misses plugins Nix puts on 'packpath'
 local loaded_plugins = function()
-	if vim.version().minor >= 12 then
-		local plugin_list = vim.pack.get()
-		for _, v in pairs(plugin_list) do
-			if v.active then
-				print(v.spec.name)
-			end
-		end
-	else
-		for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
-			local plug = path:match("(lazy.*)")
-			if plug ~= nil then
-				local _, plugin = plug:match("(/)(.*)")
-				if plugin ~= "readme" and not plugin:match("(.*)(/after)") then
-					print(plugin)
-				end
-			end
+	for _, path in ipairs(vim.api.nvim_list_runtime_paths()) do
+		-- vim.pack: pack/core/opt/<name>; home-manager / nix run: pack/<x>/start/<name>
+		local name = path:match("/pack/[^/]+/[^/]+/([^/]+)$")
+		-- Skip Neovim's bundled packages (e.g. matchit)
+		if name and not vim.startswith(path, vim.env.VIMRUNTIME) then
+			print(name)
 		end
 	end
 end
