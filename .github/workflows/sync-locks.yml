@@ -19,10 +19,8 @@ jobs:
         run: nix flake update
       - name: Format Nix files
         run: nix fmt . | grep -v "evaluation warning" || true
-      - name: Sync nix-nvim-pack-lock.json
-        run: bash sync-pack-revs.sh
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@8621497c8c39c72f3e2a999a26b4ca1b5058a842 # v5.0.1
         with:
           commit_message: "chore: sync lock files and format"
-          file_pattern: "flake.lock nix-nvim-pack-lock.json **/*.nix"
+          file_pattern: "flake.lock **/*.nix"

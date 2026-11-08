@@ -45,7 +45,7 @@ for _, plugin in pairs(repositories) do
 	table.insert(plugins, { src = "https://github.com/" .. plugin })
 end
 
--- NixOS installs these via home-manager (nix/home-manager.nix)
-if not is_nixos then
+-- Skip when Nix already put the plugins on 'packpath' (nix/plugins.nix)
+if vim.fn.globpath(vim.o.packpath, "pack/*/start/oil.nvim") == "" then
 	vim.pack.add(plugins)
 end

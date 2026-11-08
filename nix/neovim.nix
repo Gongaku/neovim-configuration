@@ -16,21 +16,22 @@ let
         ../lua
         ../after
         ../lsp
-        ../nix-nvim-pack-lock.json
       ];
     };
     installPhase = ''
       mkdir -p $out/nvim
       cp -r lua after lsp init.lua $out/nvim/
-      # vim.pack only reads a lockfile named `nvim-pack-lock.json`; serve the
-      # synced revs under that name so the flake-built nvim stays pinned.
-      cp nix-nvim-pack-lock.json $out/nvim/nvim-pack-lock.json
     '';
+  };
+  # Same plugins as home-manager; wrapRc = false keeps init.lua from nvimConfig.
+  neovim = pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+    plugins = import ./plugins.nix { inherit pkgs; };
+    wrapRc = false;
   };
 in
 pkgs.writeShellApplication {
   name = "nvim";
-  runtimeInputs = [ pkgs.neovim ];
+  runtimeInputs = [ neovim ];
   text = ''
     XDG_CONFIG_HOME="${nvimConfig}" exec nvim "$@"
   '';

@@ -18,8 +18,8 @@
 
 1. Add the GitHub path (`"owner/repo"`) to the `repositories` table in `lua/base/plugin-manager.lua`
 2. Add its setup call in `lua/base/plugin-setup.lua`
-3. Run Neovim once — `vim.pack` fetches and records the revision in `nvim-pack-lock.json`
-4. Run `./sync-pack-revs.sh` to sync the revision into `nix-nvim-pack-lock.json`
+3. Add it to `nix/plugins.nix` (from `pkgs.vimPlugins`, or `buildVimPlugin` if not in nixpkgs)
+4. Run Neovim once — `vim.pack` fetches and records the revision in `nvim-pack-lock.json`
 
 ## Adding an LSP Server
 
@@ -39,17 +39,12 @@ These are set once at startup in `lua/helpers/init.lua` and available globally a
 | `helpers.is_work`  | macOS (Darwin)                     | Disables MiniStarter, typst plugin, lualine icons |
 | `helpers.is_nixos` | `/etc/os-release` contains `nixos` | Skips Mason; enables `nixd` LSP                   |
 
-## Lock File Rationale
+## Plugin Sources
 
-Two lock files exist because the config is used in two ways:
-
-| File                      | Used by                                                                                                   |
-| ------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `nvim-pack-lock.json`     | Plain Neovim — `vim.pack` reads this to pin plugin revisions                                              |
-| `nix-nvim-pack-lock.json` | Flake-built Neovim — `nix/neovim.nix` copies it as `nvim-pack-lock.json` so `vim.pack` uses the same pins |
-
-`sync-pack-revs.sh` copies the `rev` field for each plugin from the first file into the second,
-keeping both in sync. CI runs this automatically after any lock update.
+| Setup                          | Plugins from                                                   |
+| ------------------------------ | -------------------------------------------------------------- |
+| Plain Neovim                   | `vim.pack`, pinned by `nvim-pack-lock.json`                    |
+| home-manager module, `nix run` | `nix/plugins.nix`; `vim.pack` skipped when they're on packpath |
 
 ## `after/ftplugin/` Overrides
 

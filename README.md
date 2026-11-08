@@ -23,16 +23,8 @@ git clone https://github.com/Gongaku/neovim-configuration.git "${XDG_CONFIG_HOME
 Start Neovim once so `vim.pack` can download plugins. Revisions are recorded in
 `nvim-pack-lock.json`.
 
-### Lock files
-
-| File                      | Role                                                    |
-| ------------------------- | ------------------------------------------------------- |
-| `nvim-pack-lock.json`     | Canonical plugin revisions from Neovim’s pack resolver. |
-| `nix-nvim-pack-lock.json` | Same plugins pinned for the Nix-wrapped Neovim package. |
-
-`sync-pack-revs.sh` copies revisions from `nvim-pack-lock.json` into
-`nix-nvim-pack-lock.json` so CLI Neovim and the flake-built Neovim stay aligned. CI runs this
-after lock updates.
+With Nix (home-manager module or `nix run`), plugins come from `nix/plugins.nix` instead, and
+`vim.pack` is skipped. Their versions follow the flake's `nixpkgs` input.
 
 ## Nix flake
 
