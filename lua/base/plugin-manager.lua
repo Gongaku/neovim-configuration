@@ -45,4 +45,7 @@ for _, plugin in pairs(repositories) do
 	table.insert(plugins, { src = "https://github.com/" .. plugin })
 end
 
-vim.pack.add(plugins)
+-- NixOS installs these via home-manager (nix/home-manager.nix)
+if not is_nixos then
+	vim.pack.add(plugins)
+end

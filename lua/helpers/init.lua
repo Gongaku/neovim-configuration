@@ -12,16 +12,6 @@ M.file_contains = function(filename, string)
 	return contains_string ~= nil
 end
 
-M.package_installed = function(package_name)
-	local is_installed = false
-	for _, v in pairs(vim.pack.get()) do
-		if v.active and v.spec.name == package_name then
-			is_installed = true
-		end
-	end
-	return is_installed
-end
-
 M.operating_system = tostring(vim.uv.os_uname().sysname)
 M.is_work = string.find(M.operating_system, "Darwin") ~= nil
 M.is_nixos = M.file_contains("/etc/os-release", "nixos")

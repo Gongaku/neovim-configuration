@@ -47,14 +47,9 @@ vim.diagnostic.enable() -- Enable diagnostic text
 vim.opt.updatetime = 250 -- Millisecond wait of no activity before write swap to disk
 
 -- Set theme
-local theme_installed = function(package, theme_name)
-	if helpers.package_installed(package) then
-		return theme_name
+-- First available theme wins; works for vim.pack and Nix-installed plugins
+for _, theme in ipairs({ "tokyonight-night", "catppuccin", "wildcharm" }) do
+	if pcall(vim.cmd.colorscheme, theme) then
+		break
 	end
-	return nil
 end
-
-local theme = theme_installed("tokyonight.nvim", "tokyonight-night")
-	or theme_installed("catppuccin.nvim", "catppuccin")
-	or "wildcharm"
-vim.cmd.colorscheme(theme)
