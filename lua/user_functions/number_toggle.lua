@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "Cmdline
 	pattern = "*",
 	group = augroup,
 	callback = function()
-		if vim.opt.number and vim.api.nvim_get_mode().mode ~= "i" then
+		if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
 			vim.opt.relativenumber = true
 		end
 
@@ -25,10 +25,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "Cmdline
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "CmdlineEnter", "WinLeave" }, {
 	pattern = "*",
 	group = augroup,
-	callback = function()
-		if vim.opt.number then
+	callback = function(args)
+		if vim.wo.number then
 			vim.opt.relativenumber = false
-			if not vim.tbl_contains({ "@", "-" }, vim.v.event.cmdtype) then
+			-- Cmdline mode skips redraw; other events redraw on their own, and forcing it there can hit E315
+			if args.event == "CmdlineEnter" and not vim.tbl_contains({ "@", "-" }, vim.v.event.cmdtype) then
 				vim.cmd("redraw")
 			end
 		end
